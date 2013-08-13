@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Linux Tips by thcipriani</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Linux Tips</h1>
+        <h2>Tips for JohnG =)</h2>
+        <a href="https://github.com/thcipriani/linuxtips" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a name="unix-tips" class="anchor" href="#unix-tips"><span class="octicon octicon-link"></span></a>Unix Tips</h1>
+
+<p>Catalog of information about Linux/Unix that I've found useful</p>
+
+<h2>
+<a name="unix-philosphy" class="anchor" href="#unix-philosphy"><span class="octicon octicon-link"></span></a>Unix Philosphy</h2>
+
+<blockquote>
+<p>This is the Unix philosophy: <br>
+Write programs that do one thing and do it well.  <br>
+Write programs to work together. <br>
+Write programs to handle text streams, because that is a universal interface. <br>
+   – Douglas McIlroy</p>
+
+<p>"Unix is simple. It just takes a genius to understand its simplicity." <br>
+   – Dennis Ritchie, Invetor of the C Programming Language</p>
+</blockquote>
+
+<h2>
+<a name="contents" class="anchor" href="#contents"><span class="octicon octicon-link"></span></a>Contents</h2>
+
+<p><strong>Basics:</strong></p>
+
+<ul>
+<li><a href="#text">Text and I/O</a></li>
+<li><a href="#file-system-hierarchy">File System Hierarchy</a></li>
+<li><a href="#env">Your Shell Environment</a></li>
+</ul><p><strong>Working With Textfiles:</strong></p>
+
+<ul>
+<li><a href="#find">Linux Find</a></li>
+<li><a href="#grep--sorting-output">Grep</a></li>
+<li><a href="#ack--code-search">Ack</a></li>
+</ul><p><strong>Manipulating Text:</strong></p>
+
+<ul>
+<li><a href="#cut">Cut—easy shaping of delimited data</a></li>
+<li><a href="#sed--find-and-replace">Sed—scripted find and replace</a></li>
+<li><a href="#awk--like-sed-but-different">Awk—programmatically shape data</a></li>
+</ul><p><strong>System Administration:</strong></p>
+
+<ul>
+<li><a href="#shell-startup-files">Shell Startup Files</a></li>
+<li><a href="#cron">Cron</a></li>
+<li><a href="#adding-users">User Admin</a></li>
+<li><a href="#mail">Unix Mail</a></li>
+</ul><p><strong>Stupid Fun</strong></p>
+
+<ul>
+<li><a href="#fun-commands">Fun Fun</a></li>
+</ul><hr><h2>
+<a name="text" class="anchor" href="#text"><span class="octicon octicon-link"></span></a>TEXT</h2>
+
+<p>Text is the input and the output of almost every program that you use on 
+the command line. The redirection of that input and the output via communication
+channels is the most powerful tool in Unix.</p>
+
+<ul>
+<li>Each program/process has 3 communication channels available to it:
+
+<ul>
+<li>Standard Input (STDIN)</li>
+<li>Standard Output (STDOUT)</li>
+<li>Standard Error (STDERR)</li>
+</ul>
+</li>
+<li>Each comm. channel has an associated integer (called a "File descriptor"):
+
+<ul>
+<li>STDIN=0</li>
+<li>STDOUT=1</li>
+<li>STDERR=2</li>
+</ul>
+</li>
+<li>In a terminal window:
+
+<ul>
+<li>STDIN reads from the keyboard</li>
+<li>STDOUT &amp; STDERR write to the term window</li>
+</ul>
+</li>
+</ul><h3>
+<a name="redirect-io-for-a-great-good" class="anchor" href="#redirect-io-for-a-great-good"><span class="octicon octicon-link"></span></a>Redirect I/O for a great good</h3>
+
+<ul>
+<li>
+<p>STDIN:</p>
+
+<ul>
+<li>'&lt;' allows you connect a program's STDIN to a file
+Examples:
+mail -s "Send mail from file" <a href="mailto:tyler@tylercipriani.com">tyler@tylercipriani.com</a> &lt; /path/to/file.txt
+mysql -h sa2peop_sa2 &lt; somedumpfile.sql</li>
+</ul>
+</li>
+<li>
+<p>STDOUT</p>
+
+<ul>
+<li>'&gt;' and '&gt;&gt;' redirect STDOUT</li>
+<li>'&gt;' replaces a target file's contents with a program's STDOUT</li>
+<li>'&gt;&gt;' appends a program's STDOUT to a file</li>
+<li>A file will be created if it does not exist
+Examples:
+echo "This is some text" &gt; /tmp/somefile.txt
+ls -lh &gt; this_directorys_contents.txt</li>
+</ul>
+</li>
+<li>
+<p>STDERR</p>
+
+<ul>
+<li>'2&gt;' redirects STDERR
+
+<ul>
+<li>USE CASE:
+sometimes the find command throws errors (if you don't have the 
+appropriate permissions to view a directory) to not see the errors
+in your terminal window but still see all the results (STDOUT) of 
+the find command , redirect STDERR to /dev/null (the system black hole). </li>
+<li>find . -type f -name "*.php" 2&gt; /dev/null</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><h2>
+<a name="file-system-hierarchy" class="anchor" href="#file-system-hierarchy"><span class="octicon octicon-link"></span></a>File System Hierarchy</h2>
+
+<ul>
+<li>EVERYTHING IS A FILE in Linux</li>
+<li>Your speakers are located at /dev/dsp</li>
+<li>The number of processor cores available to your system is located at /proc/cpuinfo</li>
+</ul><h3>
+<a name="run-down-of-the-fsh" class="anchor" href="#run-down-of-the-fsh"><span class="octicon octicon-link"></span></a>Run down of the FSH:</h3>
+
+<ul>
+<li>
+<code>/</code>          — Root of the filesystem</li>
+<li>
+<code>/bin</code>       — system binaries—computer needs to boot</li>
+<li>
+<code>/boot</code>      — boot loader (/boot/grub/grub.conf or menu.lst), Linux kernel (/boot/vmlinuz)</li>
+<li>
+<code>/dev</code>       — System devices (more info: <a href="http://en.wikipedia.org/wiki/Device_file">http://en.wikipedia.org/wiki/Device_file</a>)</li>
+<li>
+<code>/etc</code>       — System-wide configuration files</li>
+<li>
+<code>/home</code>      — User configuration files, users can ususally only write files in their home directory</li>
+<li>
+<code>/lib</code>       — shared library files used by system binaries</li>
+<li>
+<code>/media</code>     — auto-mounting removable media (CDRom, USB Drives, etc)</li>
+<li>
+<code>/mnt</code>       — temp filesystems (USB Drives mounted manually)</li>
+<li>
+<code>/opt</code>       — "optional software", Libreoffice installs here, some sysadmins like to install software here</li>
+<li>
+<code>/proc</code>      — provides kernel information as files</li>
+<li>
+<code>/root</code>      — home directory for root user</li>
+<li>
+<code>/srv</code>       — media served by the system - I think it makes sense to have website data here rather than /var/www</li>
+<li>
+<code>/sbin</code>      — sysadmin binaries (e.g., /sbin/ifconfig gives you ip information)</li>
+<li>
+<code>/tmp</code>       — temporary storage - cleaned frequently</li>
+<li>
+<code>/usr</code>       — programs, libraries etc for all system users</li>
+<li>
+<code>/usr/bin</code>   — programs installed for all users by linux (e.g. /usr/bin/find)</li>
+<li>
+<code>/usr/local</code> — sysadmins (me) download and install things here (executables in /usr/local/bin, source files in /usr/local/src)</li>
+<li>
+<code>/usr/sbin</code>  — more sysadmin binaries (e.g., /usr/sbin/usermod lets me modify a user)</li>
+<li>
+<code>/var</code>       — data that chanes frequently is stored here (e.g. /var/log for log files /var/www/ for webservers)</li>
+</ul><h2>
+<a name="env" class="anchor" href="#env"><span class="octicon octicon-link"></span></a>env</h2>
+
+<p><code>env</code> is used to either print a list of environment variables or run 
+another utility in an altered environment without having to modify the 
+currently existing environment. </p>
+
+<p><code>env</code> is usually located at <code>/usr/bin/env</code></p>
+
+<h2>
+<a name="command-examples" class="anchor" href="#command-examples"><span class="octicon octicon-link"></span></a>Command Examples:</h2>
+
+<ul>
+<li>check shell environment                            <br><code>cat /etc/passwd | grep</code>whoami<code>| cut -d ':' -f 7</code>
+</li>
+<li>check what shell environments are installed        <br><code>cat /etc/shells</code>
+</li>
+<li>change your default shell                          <br><code>chsh</code>whoami<code>-s &lt;valid login shell&gt;</code>
+</li>
+<li>change another user’s shell                        <br><code>sudo chsh &lt;username&gt; -s &lt;valid login shell&gt;</code>
+</li>
+<li>switch users                                       <br><code>su &lt;username&gt; (or su - to switch to root)</code>
+</li>
+<li>list all variables on your environment             <br><code>env</code>
+</li>
+<li>set temp variable for shell session                <br><code>export VARNAME=value</code>
+</li>
+<li>where env vars are set                             <br><code>/home/&lt;username&gt;/.bashrc</code>
+                                                 <br><code>/home/&lt;username&gt;/.bash_profile</code>
+                                                 <br><code>grep -P '(^\s+\.|^\s+source)' .bashrc</code>
+                                                 <br><code>grep -P '(^\s+\.|^\s+source)' .bash_profile</code>
+</li>
+<li>check specific variable                            <br><code>echo $&lt;varname&gt;</code>
+</li>
+<li>check system path                                  <br><code>echo $PATH</code>
+</li>
+<li>check if a program is installed and in system path <br><code>which &lt;program_name&gt;</code>
+</li>
+</ul><hr><h1>
+<a name="find" class="anchor" href="#find"><span class="octicon octicon-link"></span></a>FIND</h1>
+
+<ul>
+<li>Find stuff in the Filesystem Heirarchy</li>
+<li>Usually located at /usr/bin/find</li>
+<li>Searches recursivly below specified search path</li>
+<li>
+<p>more info and examples: man find</p>
+
+<p>find  [options]</p>
+</li>
+</ul><h2>
+<a name="command-examples-1" class="anchor" href="#command-examples-1"><span class="octicon octicon-link"></span></a>Command Examples:</h2>
+
+<ul>
+<li>Find a file name 'cats.txt' below current directory | <code>find . -name 'cats.txt'</code>
+</li>
+<li>Find all files below current directory              | <code>find . -type f</code>
+</li>
+<li>Find all directories below current directory        | <code>find . -type d</code>
+</li>
+<li>.txt files                                          | <code>find . -type f -name "*.txt"</code>
+</li>
+<li>case insensitive file name                          | <code>find . -iname "nOtSuReOfCaSiNg.txt"</code>
+</li>
+<li>txt files recursively to a depth of 2               | <code>find . -maxdepth 2 -type f -name "*.txt"</code>
+</li>
+<li>All NON text files                                  | <code>find . -not -name "*.txt"</code>
+</li>
+<li>Files modified less than a day ago                  | <code>find . -type f -mtime -1</code>
+</li>
+<li>Directories modified more than 10 days ago          | <code>find . -type d -mtime +10</code>
+</li>
+<li>All Files greater than 100 MB                       | <code>find . -type f -size +100M</code>
+</li>
+<li>All files smaller than 10 KB                        | <code>find . -type f -size -10K</code>
+</li>
+<li>Remove all zip files bigger than 100MB              | <code>find . -name "*.zip" -size +100M -exec rm -i "{}" \;</code>
+</li>
+<li>Remove all files in /tmp older than 2 days          | <code>find /tmp -maxdepth 1 -type f -mtime +2 -exec rm -i "{}" \;</code>
+</li>
+</ul><h1>
+<a name="grep--sorting-output" class="anchor" href="#grep--sorting-output"><span class="octicon octicon-link"></span></a>GREP – sorting output</h1>
+
+<ul>
+<li>Grep (g/re/p) stands for global regular-expression print. Its name is
+derived from a command in "ed" a Unix line-editor built in 1971.</li>
+<li>use flag i for case insensitve search</li>
+<li>use flag v to negate</li>
+<li>use flag P to use Perl-Compatible Regular Expressions (still "Highly Experimental" ::eye-roll::)</li>
+<li>use flag c to count matches (or pipe to wc -l [word-count lines - see man wc for details])</li>
+</ul><h2>
+<a name="grep-examples" class="anchor" href="#grep-examples"><span class="octicon octicon-link"></span></a>Grep Examples:</h2>
+
+<ul>
+<li>Find out if Apache is running
+
+<ul>
+<li>On CentOS                                                       | <code>ps aux | grep -i httpd</code>
+</li>
+<li>On Debian                                                       | <code>ps aux | grep -i apache</code>
+</li>
+</ul>
+</li>
+<li>Find out how many instances of ffmpeg are running (wc -l counts lines)| <code>ps aux | grep -i ffmpeg | grep -v grep | wc -l</code>
+</li>
+<li>Find text 'get_user' in all files below current dir with line numbers | <code>grep -HiERn 'get_user' .</code>
+</li>
+<li>Same as above, don't include .svn directory                           | <code>grep -HiERn 'get_user' . | grep -v '.svn'</code>
+</li>
+<li>How many proccessors does a system have                               | <code>grep -c CPU /proc/cpuinfo</code>
+</li>
+<li>Same as above                                                         | <code>cat /proc/cpuinfo | grep -i cpu    | wc -l</code>
+</li>
+<li>Same as above                                                         | <code>grep -i cpu /proc/cpuinfo | wc -l</code>
+</li>
+<li>How many users are on a system besides you?                           | <code>grep -cv</code>whoami<code>/etc/passwd</code>
+</li>
+<li>Same number as above + 1 (total system users)                         | <code>cat /etc/passwd | wc -l</code>
+</li>
+<li>What shell is dave using?                                             | <code>cat /etc/passwd | grep dave | cut -d: -f7</code>
+</li>
+</ul><h1>
+<a name="ack--code-search" class="anchor" href="#ack--code-search"><span class="octicon octicon-link"></span></a>ACK – code search</h1>
+
+<ul>
+<li><p>Ack searches files below the current directory
+recursively. It's ideal for use with code since
+it automatically excludes any .svn, .git or .cvs
+direcories from its search</p></li>
+<li><p>ack is not a gnu utility and therefore is not included by default on most
+unix-like systems. To install:
+on debian: apt-get install ack-grep
+on centos: yum install ack</p></li>
+</ul><h2>
+<a name="ack-examples" class="anchor" href="#ack-examples"><span class="octicon octicon-link"></span></a>Ack Examples:</h2>
+
+<ul>
+<li>search for a pattern in all files recursively     | <code>ack &lt;pattern&gt;</code>
+</li>
+<li>search for a pattern recursively case-insensitive | <code>ack &lt;pattern&gt;</code>
+</li>
+<li>search php files for thing recursively            | <code>ack --php &lt;pattern&gt;</code>
+</li>
+<li>search all files except javascript files          | <code>ack --nojs &lt;pattern&gt;</code>
+</li>
+</ul><hr><h1>
+<a name="cut-" class="anchor" href="#cut-"><span class="octicon octicon-link"></span></a>CUT </h1>
+
+<ul>
+<li>Print a column base on a delimeter</li>
+<li>The default delimeter is the tab character</li>
+<li>Works with Pipes to STDIN</li>
+<li>Useage: <code>cut -d "&lt;delimeter" -f "&lt;field&gt;"</code>
+</li>
+</ul><h2>
+<a name="command-examples-2" class="anchor" href="#command-examples-2"><span class="octicon octicon-link"></span></a>Command Examples:</h2>
+
+<ul>
+<li>
+<code>/etc/passwd</code> is delimited by ":" so… first column | <code>cat /etc/passwd | cut -d ":" -f $1</code>
+</li>
+<li>
+<code>/etc/passwd</code> 7th column                           | <code>cat /etc/passwd | cut -d ":" -f $7</code>
+</li>
+</ul><h1>
+<a name="sed--find-and-replace" class="anchor" href="#sed--find-and-replace"><span class="octicon octicon-link"></span></a>SED – find and replace</h1>
+
+<ul>
+<li>Used to find and replace in text stream</li>
+<li>Can be used to append to a file after or before a given pattern</li>
+<li>I mainly use it with Unix Pipes (e.g., with STDIN)</li>
+<li><a href="http://sed.sourceforge.net/sed1line.txt">http://sed.sourceforge.net/sed1line.txt</a></li>
+</ul><h2>
+<a name="command-examples-3" class="anchor" href="#command-examples-3"><span class="octicon octicon-link"></span></a>Command Examples:</h2>
+
+<ul>
+<li>Change day into night in a file                        | <code>cat &lt;somefile.txt&gt; | sed -e 's/day/night/g' &gt; newfile.txt</code>
+</li>
+<li>ReName all text files to -old.txt            | <code>find . -maxdepth 1 -type f -iname '*.txt' | sed -e 's,\(\(.*\).txt\),mv "\1" "\2-old.txt",g' | /bin/bash</code>
+</li>
+<li>ReName all those text files back to -old.txt | <code>find . -maxdepth 1 -type f -iname '*.txt' | sed -e 's,\(.*\)-old.txt,mv "\0" "\1.txt",g' | /bin/bash</code>
+</li>
+<li>Add line to file after 3rd line
+ <code>bash 
+ sed '3 a\
+ some line' &lt;somefile&gt;.txt
+</code>
+</li>
+<li>Add line to file after regex pattern
+ <code>bash
+ sed '/pattern/a\
+ some line' &lt;somefile&gt;.txt
+</code>
+</li>
+<li>Add a line at the end of the file
+ <code>bash
+ sed '$ a\
+ some line at the end' &lt;somefile&gt;.txt
+</code>
+</li>
+<li>Print all lines between n1 and n2 | <code>sed -n 'n1,n2p'</code>
+</li>
+</ul><h1>
+<a name="awk--like-sed-but-different" class="anchor" href="#awk--like-sed-but-different"><span class="octicon octicon-link"></span></a>AWK – Like sed but different</h1>
+
+<ul>
+<li>I use a mix of cut, sed and grep instead of Awk</li>
+<li>Usage examples: <a href="http://www.thegeekstuff.com/2010/01/awk-introduction-tutorial-7-awk-print-examples/">http://www.thegeekstuff.com/2010/01/awk-introduction-tutorial-7-awk-print-examples/</a>
+</li>
+<li>Oneliners: <a href="http://www.pement.org/awk/awk1line.txt">http://www.pement.org/awk/awk1line.txt</a>
+</li>
+<li>
+<strong>AWK tutorial</strong>—<a href="http://www.grymoire.com/Unix/Awk.html">http://www.grymoire.com/Unix/Awk.html</a>
+</li>
+</ul><hr><h2>
+<a name="shell-startup-files" class="anchor" href="#shell-startup-files"><span class="octicon octicon-link"></span></a>Shell Startup Files</h2>
+
+<h3>
+<a name="login-scripts" class="anchor" href="#login-scripts"><span class="octicon octicon-link"></span></a>Login scripts</h3>
+
+<h4>
+<a name="on-linux" class="anchor" href="#on-linux"><span class="octicon octicon-link"></span></a>On Linux</h4>
+
+<ul>
+<li>
+<p>BASH:</p>
+
+<ul>
+<li>via SSH:<br><code>/etc/profile</code> → first of <code>~/.bash_profile</code>, <code>~/.bash_login</code>, <code>~/.profile</code> that exists</li>
+<li>via Terminal-type program:<br><code>/etc/bash.bashrc</code> → <code>.bashrc</code>
+</li>
+<li>scripts using <code>/usr/bin/env bash</code>:<br>
+looks for <code>$BASH_ENV</code> var and sources the expansion of that variable</li>
+</ul>
+</li>
+<li>
+<p>ZSH:</p>
+
+<ul>
+<li>via SSH:<br><code>/etc/zshenv</code> → <code>~/.zshenv</code> → <code>/etc/zprofile</code> → <code>~/.zprofile</code> → <code>/etc/zshrc</code> → <code>~/.zshrc</code> → <code>/etc/zlogin</code> → <code>~/.zslogin</code>
+</li>
+<li>
+<code>/etc/z*</code> is the default; however <code>/etc/zsh/z*</code> seems to be common (at least on Ubuntu)</li>
+<li>via Terminal-type program:<br><code>/etc/zshrc</code> → <code>~/.zshrc</code>
+</li>
+<li>Scripts:<br><code>/etc/zshenv</code>
+</li>
+</ul>
+</li>
+</ul><h4>
+<a name="on-osx" class="anchor" href="#on-osx"><span class="octicon octicon-link"></span></a>On OSX</h4>
+
+<ul>
+<li>
+<p>ZSH:</p>
+
+<ul>
+<li>Terminal, iTerm or SSH:<br><code>/etc/zshenv</code> → <code>~/.zshenv</code> → <code>/etc/zprofile</code> → <code>~/.zprofile</code> → <code>/etc/zshrc</code> → <code>~/.zshrc</code> → <code>/etc/zlogin</code> → <code>~/.zslogin</code>
+</li>
+<li>Scripts:<br><code>/etc/zshenv</code>
+</li>
+</ul>
+</li>
+<li>
+<p>BASH:</p>
+
+<ul>
+<li>Terminal, iTerm or SSH:<br><code>/etc/profile</code> → first of <code>~/.bash_profile</code>, <code>~/.bash_login</code>, <code>~/.profile</code> that exists</li>
+<li>scripts using <code>/usr/bin/env bash</code>:<br>
+looks for <code>$BASH_ENV</code> var and sources the expansion of that variable</li>
+</ul>
+</li>
+</ul><h2>
+<a name="inputrc" class="anchor" href="#inputrc"><span class="octicon octicon-link"></span></a>.inputrc</h2>
+
+<p><a href="http://www.reddit.com/r/commandline/comments/kbeoe/you_can_make_readline_and_bash_much_more_user/">http://www.reddit.com/r/commandline/comments/kbeoe/you_can_make_readline_and_bash_much_more_user/</a></p>
+
+<h2>
+<a name="cron" class="anchor" href="#cron"><span class="octicon octicon-link"></span></a>CRON</h2>
+
+<ul>
+<li>Cronjobs are sheduled system tasks</li>
+<li>Cronjobs are per user. 
+The root user has a different set of crons than the Tyler user</li>
+<li>Crontab is the program used to manage cronjobs</li>
+<li>To edit cronjobs use the command <code>crontab -e</code>
+</li>
+</ul><h3>
+<a name="cronjob-time-syntax" class="anchor" href="#cronjob-time-syntax"><span class="octicon octicon-link"></span></a>Cronjob Time Syntax:</h3>
+
+<ul>
+<li>m h dom m dow <ul>
+<li>m - minute(0–59)</li>
+<li>h - hour(0–23)</li>
+<li>dom - day-of-month(0–31)</li>
+<li>m - month(0-11)</li>
+<li>dow - day-of-week(0–6)</li>
+<li> - anycommand</li>
+</ul>
+</li>
+</ul><h3>
+<a name="crontab-examples" class="anchor" href="#crontab-examples"><span class="octicon octicon-link"></span></a>Crontab Examples:</h3>
+
+<ul>
+<li>Execute  every 15 minutes                   | <code>*/15 * * * * &lt;command&gt;</code>
+</li>
+<li>Execute  at top of every hour on monday     | <code>0 * * * 1 &lt;command&gt;</code>
+</li>
+<li>Execute  at 10 after, 15 after and 20 after | <code>10,15,20 * * * * &lt;command&gt;</code>
+</li>
+</ul><h2>
+<a name="adding-users" class="anchor" href="#adding-users"><span class="octicon octicon-link"></span></a>Adding Users:</h2>
+
+<ul>
+<li>Difference between adduser &amp; useradd                                          | <a href="http://www.garron.me/en/go2linux/useradd-vs-adduser-ubuntu-linux.html">tl;dr no difference in Centos, use useradd in debian</a>
+</li>
+<li>Add a user                                                                    | <code>useradd &lt;new_username&gt;</code>
+</li>
+<li>Add an existing user to a group                                               | <code>usermod -a -G &lt;new_username&gt;</code>
+</li>
+<li>Find group ids for a user                                                     | <code>id -G &lt;username&gt;</code>
+</li>
+<li>Find groupnames for a user                                                    | <code>groups &lt;username&gt;</code>
+</li>
+<li>Edit defaults for adding a user (e.g., the user's shell, default group etc)   | <code>sudo vim /etc/default/useradd</code>
+</li>
+<li>Edit default files created for a user (e.g., .profile, .bashrc, .vimrc, etc ) | <code>sudo cp &lt;file_to_add&gt; /etc/skel/</code>
+</li>
+<li>Manage group permissions                                                      | <code>visudo</code> checkout lines that begin with <code>%&lt;groupname&gt;</code> or <code>&lt;username&gt;</code>
+</li>
+</ul><h1>
+<a name="unix-mail" class="anchor" href="#unix-mail"><span class="octicon octicon-link"></span></a>Unix Mail</h1>
+
+<ul>
+<li>
+<code>mail</code>
+takes you to the mailbox for your user</li>
+<li>
+<code>help</code>
+inside the mail program shows you mail help</li>
+<li>
+<code>h</code>
+shows message headers</li>
+<li>
+<code>d</code>
+deletes a message</li>
+<li>
+<code>d 1-100</code>
+deletes messages between 1 and 100</li>
+<li>
+<code>q</code>
+quits</li>
+</ul><hr><h1>
+<a name="fun-commands" class="anchor" href="#fun-commands"><span class="octicon octicon-link"></span></a>Fun Commands</h1>
+
+<ul>
+<li>
+<strong>Generate a list of your most used commands</strong>— 
+<code>bash
+history | sed "s/^[0-9 ]*//" | sed "s/ *| */\n/g" | awk '{print $1}' | sort | uniq -c | sort -rn | head -n 100 &gt; commands.txt
+</code>
+</li>
+<li>
+<strong>Nyan Cat</strong>—<code>telnet miku.acm.uiuc.edu</code>
+</li>
+<li>
+<strong>RickRollrc</strong>—<code>curl -L http://bit.ly/10hA8iC | bash</code>
+</li>
+<li>
+<strong>Star Wars</strong>—<code>telnet towel.blinkenlights.nl</code>
+</li>
+</ul>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/thcipriani/linuxtips/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/thcipriani/linuxtips/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/thcipriani/linuxtips"></a> is maintained by <a href="https://github.com/thcipriani">thcipriani</a>.</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
