@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Linux Tips : Tips for JohnG =)" />
 
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <title>Linux Tips by thcipriani</title>
+    <title>Linux Tips</title>
   </head>
 
   <body>
-    <header>
-      <div class="inner">
-        <h1>Linux Tips</h1>
-        <h2>Tips for JohnG =)</h2>
-        <a href="https://github.com/thcipriani/linuxtips" class="button"><small>View project on</small>GitHub</a>
-      </div>
-    </header>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h1>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/thcipriani/linuxtips">View on GitHub</a>
+
+          <h1 id="project_title">Linux Tips</h1>
+          <h2 id="project_tagline">Tips for JohnG =)</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/thcipriani/linuxtips/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/thcipriani/linuxtips/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
 <a name="unix-tips" class="anchor" href="#unix-tips"><span class="octicon octicon-link"></span></a>Unix Tips</h1>
 
 <p>Catalog of information about Linux/Unix that I've found useful</p>
@@ -48,39 +51,18 @@ Write programs to handle text streams, because that is a universal interface. <b
 </blockquote>
 
 <h2>
-<a name="contents" class="anchor" href="#contents"><span class="octicon octicon-link"></span></a>Contents</h2>
+<a name="table-of-contents" class="anchor" href="#table-of-contents"><span class="octicon octicon-link"></span></a>Table of Contents</h2>
 
-<p><strong>Basics:</strong></p>
+<ol>
+<li><a href="#basics">Basics</a></li>
+<li><a href="#searching">Searching</a></li>
+<li><a href="#manipulating-text-output">Manipulating Text</a></li>
+<li><a href="#system-administration">System Administration</a></li>
+<li><a href="#fun-commands">Fun Commands</a></li>
+</ol><h2>
+<a name="basics" class="anchor" href="#basics"><span class="octicon octicon-link"></span></a>Basics</h2>
 
-<ul>
-<li><a href="#text">Text and I/O</a></li>
-<li><a href="#file-system-hierarchy">File System Hierarchy</a></li>
-<li><a href="#env">Your Shell Environment</a></li>
-</ul><p><strong>Working With Textfiles:</strong></p>
-
-<ul>
-<li><a href="#find">Linux Find</a></li>
-<li><a href="#grep--sorting-output">Grep</a></li>
-<li><a href="#ack--code-search">Ack</a></li>
-</ul><p><strong>Manipulating Text:</strong></p>
-
-<ul>
-<li><a href="#cut">Cut—easy shaping of delimited data</a></li>
-<li><a href="#sed--find-and-replace">Sed—scripted find and replace</a></li>
-<li><a href="#awk--like-sed-but-different">Awk—programmatically shape data</a></li>
-</ul><p><strong>System Administration:</strong></p>
-
-<ul>
-<li><a href="#shell-startup-files">Shell Startup Files</a></li>
-<li><a href="#cron">Cron</a></li>
-<li><a href="#adding-users">User Admin</a></li>
-<li><a href="#mail">Unix Mail</a></li>
-</ul><p><strong>Stupid Fun</strong></p>
-
-<ul>
-<li><a href="#fun-commands">Fun Fun</a></li>
-</ul><hr><h2>
-<a name="text" class="anchor" href="#text"><span class="octicon octicon-link"></span></a>TEXT</h2>
+<p><strong>Redirect I/O for a great good</strong></p>
 
 <p>Text is the input and the output of almost every program that you use on 
 the command line. The redirection of that input and the output via communication
@@ -103,17 +85,14 @@ channels is the most powerful tool in Unix.</p>
 <li>STDERR=2</li>
 </ul>
 </li>
-<li>In a terminal window:
+<li>
+<p>In a terminal window:</p>
 
 <ul>
 <li>STDIN reads from the keyboard</li>
 <li>STDOUT &amp; STDERR write to the term window</li>
 </ul>
 </li>
-</ul><h3>
-<a name="redirect-io-for-a-great-good" class="anchor" href="#redirect-io-for-a-great-good"><span class="octicon octicon-link"></span></a>Redirect I/O for a great good</h3>
-
-<ul>
 <li>
 <p>STDIN:</p>
 
@@ -154,15 +133,13 @@ the find command , redirect STDERR to /dev/null (the system black hole). </li>
 </li>
 </ul>
 </li>
-</ul><h2>
-<a name="file-system-hierarchy" class="anchor" href="#file-system-hierarchy"><span class="octicon octicon-link"></span></a>File System Hierarchy</h2>
+</ul><p><strong>File System Hierarchy</strong></p>
 
 <ul>
 <li>EVERYTHING IS A FILE in Linux</li>
 <li>Your speakers are located at /dev/dsp</li>
 <li>The number of processor cores available to your system is located at /proc/cpuinfo</li>
-</ul><h3>
-<a name="run-down-of-the-fsh" class="anchor" href="#run-down-of-the-fsh"><span class="octicon octicon-link"></span></a>Run down of the FSH:</h3>
+</ul><p><em>Run down of the FSH:</em></p>
 
 <ul>
 <li>
@@ -205,8 +182,7 @@ the find command , redirect STDERR to /dev/null (the system black hole). </li>
 <code>/usr/sbin</code>  — more sysadmin binaries (e.g., /usr/sbin/usermod lets me modify a user)</li>
 <li>
 <code>/var</code>       — data that chanes frequently is stored here (e.g. /var/log for log files /var/www/ for webservers)</li>
-</ul><h2>
-<a name="env" class="anchor" href="#env"><span class="octicon octicon-link"></span></a>env</h2>
+</ul><p><strong>Environment</strong></p>
 
 <p><code>env</code> is used to either print a list of environment variables or run 
 another utility in an altered environment without having to modify the 
@@ -214,8 +190,7 @@ currently existing environment. </p>
 
 <p><code>env</code> is usually located at <code>/usr/bin/env</code></p>
 
-<h2>
-<a name="command-examples" class="anchor" href="#command-examples"><span class="octicon octicon-link"></span></a>Command Examples:</h2>
+<p><em>Command Examples:</em></p>
 
 <ul>
 <li>check shell environment                            <br><code>cat /etc/passwd | grep</code>whoami<code>| cut -d ':' -f 7</code>
@@ -243,20 +218,20 @@ currently existing environment. </p>
 </li>
 <li>check if a program is installed and in system path <br><code>which &lt;program_name&gt;</code>
 </li>
-</ul><hr><h1>
-<a name="find" class="anchor" href="#find"><span class="octicon octicon-link"></span></a>FIND</h1>
+</ul><h2>
+<a name="searching" class="anchor" href="#searching"><span class="octicon octicon-link"></span></a>Searching</h2>
+
+<p><strong>Find</strong></p>
 
 <ul>
 <li>Find stuff in the Filesystem Heirarchy</li>
 <li>Usually located at /usr/bin/find</li>
 <li>Searches recursivly below specified search path</li>
-<li>
-<p>more info and examples: man find</p>
+<li>more info and examples: man find</li>
+</ul><pre lang="Shell"><code>find &lt;search_path&gt; [options]
+</code></pre>
 
-<p>find  [options]</p>
-</li>
-</ul><h2>
-<a name="command-examples-1" class="anchor" href="#command-examples-1"><span class="octicon octicon-link"></span></a>Command Examples:</h2>
+<p><em>Command Examples:</em></p>
 
 <ul>
 <li>Find a file name 'cats.txt' below current directory | <code>find . -name 'cats.txt'</code>
@@ -285,8 +260,7 @@ currently existing environment. </p>
 </li>
 <li>Remove all files in /tmp older than 2 days          | <code>find /tmp -maxdepth 1 -type f -mtime +2 -exec rm -i "{}" \;</code>
 </li>
-</ul><h1>
-<a name="grep--sorting-output" class="anchor" href="#grep--sorting-output"><span class="octicon octicon-link"></span></a>GREP – sorting output</h1>
+</ul><p><strong>Grep</strong></p>
 
 <ul>
 <li>Grep (g/re/p) stands for global regular-expression print. Its name is
@@ -295,8 +269,7 @@ derived from a command in "ed" a Unix line-editor built in 1971.</li>
 <li>use flag v to negate</li>
 <li>use flag P to use Perl-Compatible Regular Expressions (still "Highly Experimental" ::eye-roll::)</li>
 <li>use flag c to count matches (or pipe to wc -l [word-count lines - see man wc for details])</li>
-</ul><h2>
-<a name="grep-examples" class="anchor" href="#grep-examples"><span class="octicon octicon-link"></span></a>Grep Examples:</h2>
+</ul><p><em>Grep Examples:</em></p>
 
 <ul>
 <li>Find out if Apache is running
@@ -326,8 +299,7 @@ derived from a command in "ed" a Unix line-editor built in 1971.</li>
 </li>
 <li>What shell is dave using?                                             | <code>cat /etc/passwd | grep dave | cut -d: -f7</code>
 </li>
-</ul><h1>
-<a name="ack--code-search" class="anchor" href="#ack--code-search"><span class="octicon octicon-link"></span></a>ACK – code search</h1>
+</ul><p><strong>Ack</strong></p>
 
 <ul>
 <li><p>Ack searches files below the current directory
@@ -338,8 +310,7 @@ direcories from its search</p></li>
 unix-like systems. To install:
 on debian: apt-get install ack-grep
 on centos: yum install ack</p></li>
-</ul><h2>
-<a name="ack-examples" class="anchor" href="#ack-examples"><span class="octicon octicon-link"></span></a>Ack Examples:</h2>
+</ul><p><em>Ack Examples:</em></p>
 
 <ul>
 <li>search for a pattern in all files recursively     | <code>ack &lt;pattern&gt;</code>
@@ -350,8 +321,10 @@ on centos: yum install ack</p></li>
 </li>
 <li>search all files except javascript files          | <code>ack --nojs &lt;pattern&gt;</code>
 </li>
-</ul><hr><h1>
-<a name="cut-" class="anchor" href="#cut-"><span class="octicon octicon-link"></span></a>CUT </h1>
+</ul><h2>
+<a name="manipulating-text-output" class="anchor" href="#manipulating-text-output"><span class="octicon octicon-link"></span></a>Manipulating Text Output</h2>
+
+<p><strong>Cut</strong>:</p>
 
 <ul>
 <li>Print a column base on a delimeter</li>
@@ -359,8 +332,7 @@ on centos: yum install ack</p></li>
 <li>Works with Pipes to STDIN</li>
 <li>Useage: <code>cut -d "&lt;delimeter" -f "&lt;field&gt;"</code>
 </li>
-</ul><h2>
-<a name="command-examples-2" class="anchor" href="#command-examples-2"><span class="octicon octicon-link"></span></a>Command Examples:</h2>
+</ul><p><em>Command Examples:</em></p>
 
 <ul>
 <li>
@@ -369,16 +341,14 @@ on centos: yum install ack</p></li>
 <li>
 <code>/etc/passwd</code> 7th column                           | <code>cat /etc/passwd | cut -d ":" -f $7</code>
 </li>
-</ul><h1>
-<a name="sed--find-and-replace" class="anchor" href="#sed--find-and-replace"><span class="octicon octicon-link"></span></a>SED – find and replace</h1>
+</ul><p><strong>Sed</strong> – Ed Substitution:</p>
 
 <ul>
 <li>Used to find and replace in text stream</li>
 <li>Can be used to append to a file after or before a given pattern</li>
 <li>I mainly use it with Unix Pipes (e.g., with STDIN)</li>
 <li><a href="http://sed.sourceforge.net/sed1line.txt">http://sed.sourceforge.net/sed1line.txt</a></li>
-</ul><h2>
-<a name="command-examples-3" class="anchor" href="#command-examples-3"><span class="octicon octicon-link"></span></a>Command Examples:</h2>
+</ul><p><em>Command Examples:</em></p>
 
 <ul>
 <li>Change day into night in a file                        | <code>cat &lt;somefile.txt&gt; | sed -e 's/day/night/g' &gt; newfile.txt</code>
@@ -407,8 +377,7 @@ on centos: yum install ack</p></li>
 </li>
 <li>Print all lines between n1 and n2 | <code>sed -n 'n1,n2p'</code>
 </li>
-</ul><h1>
-<a name="awk--like-sed-but-different" class="anchor" href="#awk--like-sed-but-different"><span class="octicon octicon-link"></span></a>AWK – Like sed but different</h1>
+</ul><p><strong>Awk</strong> – Like sed but different</p>
 
 <ul>
 <li>I use a mix of cut, sed and grep instead of Awk</li>
@@ -419,18 +388,24 @@ on centos: yum install ack</p></li>
 <li>
 <strong>AWK tutorial</strong>—<a href="http://www.grymoire.com/Unix/Awk.html">http://www.grymoire.com/Unix/Awk.html</a>
 </li>
-</ul><hr><h2>
-<a name="shell-startup-files" class="anchor" href="#shell-startup-files"><span class="octicon octicon-link"></span></a>Shell Startup Files</h2>
+</ul><h2>
+<a name="system-administration" class="anchor" href="#system-administration"><span class="octicon octicon-link"></span></a>System Administration</h2>
 
-<h3>
-<a name="login-scripts" class="anchor" href="#login-scripts"><span class="octicon octicon-link"></span></a>Login scripts</h3>
+<p><strong>Shell Startup Files</strong></p>
 
-<h4>
-<a name="on-linux" class="anchor" href="#on-linux"><span class="octicon octicon-link"></span></a>On Linux</h4>
+<p>The order in which Shell startup scripts are run and which scripts are run
+varies based on whether you are:</p>
+
+<ol>
+<li>On a Mac or Linux Machine</li>
+<li>In a logon shell (TTY) or a Terminal Emulator (e.g., Gnome-Terminal)</li>
+<li>Running the shell interactively or from a script</li>
+<li>What shell you are running</li>
+</ol><p><em>On Linux</em></p>
 
 <ul>
 <li>
-<p>BASH:</p>
+<p>Bash:</p>
 
 <ul>
 <li>via SSH:<br><code>/etc/profile</code> → first of <code>~/.bash_profile</code>, <code>~/.bash_login</code>, <code>~/.profile</code> that exists</li>
@@ -441,7 +416,7 @@ looks for <code>$BASH_ENV</code> var and sources the expansion of that variable<
 </ul>
 </li>
 <li>
-<p>ZSH:</p>
+<p>Z-Shell:</p>
 
 <ul>
 <li>via SSH:<br><code>/etc/zshenv</code> → <code>~/.zshenv</code> → <code>/etc/zprofile</code> → <code>~/.zprofile</code> → <code>/etc/zshrc</code> → <code>~/.zshrc</code> → <code>/etc/zlogin</code> → <code>~/.zslogin</code>
@@ -454,12 +429,20 @@ looks for <code>$BASH_ENV</code> var and sources the expansion of that variable<
 </li>
 </ul>
 </li>
-</ul><h4>
-<a name="on-osx" class="anchor" href="#on-osx"><span class="octicon octicon-link"></span></a>On OSX</h4>
+</ul><p><em>On OSX</em></p>
 
 <ul>
 <li>
-<p>ZSH:</p>
+<p>Bash:</p>
+
+<ul>
+<li>Terminal, iTerm or SSH:<br><code>/etc/profile</code> → first of <code>~/.bash_profile</code>, <code>~/.bash_login</code>, <code>~/.profile</code> that exists</li>
+<li>scripts using <code>/usr/bin/env bash</code>:<br>
+looks for <code>$BASH_ENV</code> var and sources the expansion of that variable</li>
+</ul>
+</li>
+<li>
+<p>Z-Shell:</p>
 
 <ul>
 <li>Terminal, iTerm or SSH:<br><code>/etc/zshenv</code> → <code>~/.zshenv</code> → <code>/etc/zprofile</code> → <code>~/.zprofile</code> → <code>/etc/zshrc</code> → <code>~/.zshrc</code> → <code>/etc/zlogin</code> → <code>~/.zslogin</code>
@@ -468,22 +451,11 @@ looks for <code>$BASH_ENV</code> var and sources the expansion of that variable<
 </li>
 </ul>
 </li>
-<li>
-<p>BASH:</p>
-
-<ul>
-<li>Terminal, iTerm or SSH:<br><code>/etc/profile</code> → first of <code>~/.bash_profile</code>, <code>~/.bash_login</code>, <code>~/.profile</code> that exists</li>
-<li>scripts using <code>/usr/bin/env bash</code>:<br>
-looks for <code>$BASH_ENV</code> var and sources the expansion of that variable</li>
-</ul>
-</li>
-</ul><h2>
-<a name="inputrc" class="anchor" href="#inputrc"><span class="octicon octicon-link"></span></a>.inputrc</h2>
+</ul><p><strong>.inputrc</strong></p>
 
 <p><a href="http://www.reddit.com/r/commandline/comments/kbeoe/you_can_make_readline_and_bash_much_more_user/">http://www.reddit.com/r/commandline/comments/kbeoe/you_can_make_readline_and_bash_much_more_user/</a></p>
 
-<h2>
-<a name="cron" class="anchor" href="#cron"><span class="octicon octicon-link"></span></a>CRON</h2>
+<p><strong>Cron Jobs</strong></p>
 
 <ul>
 <li>Cronjobs are sheduled system tasks</li>
@@ -492,8 +464,7 @@ The root user has a different set of crons than the Tyler user</li>
 <li>Crontab is the program used to manage cronjobs</li>
 <li>To edit cronjobs use the command <code>crontab -e</code>
 </li>
-</ul><h3>
-<a name="cronjob-time-syntax" class="anchor" href="#cronjob-time-syntax"><span class="octicon octicon-link"></span></a>Cronjob Time Syntax:</h3>
+</ul><p><em>Cronjob Time Syntax:</em></p>
 
 <ul>
 <li>m h dom m dow <ul>
@@ -505,8 +476,7 @@ The root user has a different set of crons than the Tyler user</li>
 <li> - anycommand</li>
 </ul>
 </li>
-</ul><h3>
-<a name="crontab-examples" class="anchor" href="#crontab-examples"><span class="octicon octicon-link"></span></a>Crontab Examples:</h3>
+</ul><p><em>Crontab Examples:</em></p>
 
 <ul>
 <li>Execute  every 15 minutes                   | <code>*/15 * * * * &lt;command&gt;</code>
@@ -515,8 +485,7 @@ The root user has a different set of crons than the Tyler user</li>
 </li>
 <li>Execute  at 10 after, 15 after and 20 after | <code>10,15,20 * * * * &lt;command&gt;</code>
 </li>
-</ul><h2>
-<a name="adding-users" class="anchor" href="#adding-users"><span class="octicon octicon-link"></span></a>Adding Users:</h2>
+</ul><p><strong>Users</strong></p>
 
 <ul>
 <li>Difference between adduser &amp; useradd                                          | <a href="http://www.garron.me/en/go2linux/useradd-vs-adduser-ubuntu-linux.html">tl;dr no difference in Centos, use useradd in debian</a>
@@ -535,8 +504,7 @@ The root user has a different set of crons than the Tyler user</li>
 </li>
 <li>Manage group permissions                                                      | <code>visudo</code> checkout lines that begin with <code>%&lt;groupname&gt;</code> or <code>&lt;username&gt;</code>
 </li>
-</ul><h1>
-<a name="unix-mail" class="anchor" href="#unix-mail"><span class="octicon octicon-link"></span></a>Unix Mail</h1>
+</ul><p><strong>Unix Mail</strong></p>
 
 <ul>
 <li>
@@ -557,45 +525,44 @@ deletes messages between 1 and 100</li>
 <li>
 <code>q</code>
 quits</li>
-</ul><hr><h1>
-<a name="fun-commands" class="anchor" href="#fun-commands"><span class="octicon octicon-link"></span></a>Fun Commands</h1>
+</ul><h2>
+<a name="fun-commands" class="anchor" href="#fun-commands"><span class="octicon octicon-link"></span></a>Fun Commands</h2>
 
 <ul>
-<li>
-<strong>Generate a list of your most used commands</strong>— 
+<li>Generate a list of your most used commands— 
 <code>bash
 history | sed "s/^[0-9 ]*//" | sed "s/ *| */\n/g" | awk '{print $1}' | sort | uniq -c | sort -rn | head -n 100 &gt; commands.txt
 </code>
 </li>
-<li>
-<strong>Nyan Cat</strong>—<code>telnet miku.acm.uiuc.edu</code>
+<li>Nyan Cat—<code>telnet miku.acm.uiuc.edu</code>
 </li>
-<li>
-<strong>RickRollrc</strong>—<code>curl -L http://bit.ly/10hA8iC | bash</code>
+<li>RickRollrc—<code>curl -L http://bit.ly/10hA8iC | bash</code>
 </li>
-<li>
-<strong>Star Wars</strong>—<code>telnet towel.blinkenlights.nl</code>
+<li>Star Wars—<code>telnet towel.blinkenlights.nl</code>
 </li>
 </ul>
-        </section>
-
-        <aside id="sidebar">
-          <a href="https://github.com/thcipriani/linuxtips/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/thcipriani/linuxtips/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
-
-          <p class="repo-owner"><a href="https://github.com/thcipriani/linuxtips"></a> is maintained by <a href="https://github.com/thcipriani">thcipriani</a>.</p>
-
-          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
+      </section>
     </div>
 
-  
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Linux Tips maintained by <a href="https://github.com/thcipriani">thcipriani</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-25103397-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
   </body>
 </html>
