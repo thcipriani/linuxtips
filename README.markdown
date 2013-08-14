@@ -23,6 +23,8 @@ Catalog of information about Linux/Unix that I've found useful
 
 ## Basics
 
+**Redirect I/O for a great good**
+
 Text is the input and the output of almost every program that you use on 
 the command line. The redirection of that input and the output via communication
 channels is the most powerful tool in Unix.
@@ -38,8 +40,6 @@ channels is the most powerful tool in Unix.
 - In a terminal window:
   + STDIN reads from the keyboard
   + STDOUT & STDERR write to the term window
-
-**Redirect I/O for a great good**
 
 - STDIN:
     + '<' allows you connect a program's STDIN to a file
@@ -72,7 +72,7 @@ channels is the most powerful tool in Unix.
 - Your speakers are located at /dev/dsp
 - The number of processor cores available to your system is located at /proc/cpuinfo
 
-**Run down of the FSH:**
+_Run down of the FSH:_
 
 - `/`          — Root of the filesystem
 - `/bin`       — system binaries—computer needs to boot
@@ -104,8 +104,8 @@ currently existing environment.
 
 `env` is usually located at `/usr/bin/env`
 
-Command Examples:
-----------
+_Command Examples:_
+
 - check shell environment                            <br /> `cat /etc/passwd | grep `whoami` | cut -d ':' -f 7`
 - check what shell environments are installed        <br /> `cat /etc/shells`
 - change your default shell                          <br /> `chsh `whoami` -s <valid login shell>`
@@ -135,7 +135,7 @@ Command Examples:
 find <search_path> [options]
 ```
 
-**Command Examples:**
+_Command Examples:_
 
 - Find a file name 'cats.txt' below current directory | `find . -name 'cats.txt'`
 - Find all files below current directory              | `find . -type f`
@@ -152,7 +152,7 @@ find <search_path> [options]
 - Remove all files in /tmp older than 2 days          | `find /tmp -maxdepth 1 -type f -mtime +2 -exec rm -i "{}" \;`
 
 
-**Grep** – Global/Regular-Expression/Print
+**Grep**
 
 - Grep (g/re/p) stands for global regular-expression print. Its name is
   derived from a command in "ed" a Unix line-editor built in 1971.
@@ -161,7 +161,7 @@ find <search_path> [options]
 - use flag P to use Perl-Compatible Regular Expressions (still "Highly Experimental" ::eye-roll::)
 - use flag c to count matches (or pipe to wc -l [word-count lines - see man wc for details])
 
-**Grep Examples:**
+_Grep Examples:_
 
 - Find out if Apache is running
   - On CentOS                                                       | `ps aux | grep -i httpd`
@@ -177,7 +177,8 @@ find <search_path> [options]
 - What shell is dave using?                                             | `cat /etc/passwd | grep dave | cut -d: -f7`
 
 
-**Ack** – Better than Grep
+**Ack**
+
 - Ack searches files below the current directory
   recursively. It's ideal for use with code since
   it automatically excludes any .svn, .git or .cvs
@@ -188,7 +189,7 @@ find <search_path> [options]
   on debian: apt-get install ack-grep
   on centos: yum install ack
 
-**Ack Examples:**
+_Ack Examples:_
 
 - search for a pattern in all files recursively     | `ack <pattern>`
 - search for a pattern recursively case-insensitive | `ack <pattern>`
