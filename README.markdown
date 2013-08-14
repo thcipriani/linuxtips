@@ -13,35 +13,15 @@ Catalog of information about Linux/Unix that I've found useful
 >"Unix is simple. It just takes a genius to understand its simplicity." <br />
 >    – Dennis Ritchie, Invetor of the C Programming Language
 
-## Contents
+## Table of Contents
 
-**Basics:**
-- <a href="#text">Text and I/O</a>
-- <a href="#file-system-hierarchy">File System Hierarchy</a>
-- <a href="#env">Your Shell Environment</a>
+1. [Basics](#basics)
+2. [Searching](#searching)
+3. [Manipulating Text](#manipulating-text-output)
+4. [System Administration](#system-administration)
+5. [Fun Commands](#fun-commands)
 
-**Working With Textfiles:**
-- <a href="#find">Linux Find</a>
-- <a href="#grep--sorting-output">Grep</a>
-- <a href="#ack--code-search">Ack</a>
-
-**Manipulating Text:**
-- <a href="#cut">Cut—easy shaping of delimited data</a>
-- <a href="#sed--find-and-replace">Sed—scripted find and replace</a>
-- <a href="#awk--like-sed-but-different">Awk—programmatically shape data</a>
-
-**System Administration:**
-- <a href="#shell-startup-files">Shell Startup Files</a>
-- <a href="#cron">Cron</a>
-- <a href="#adding-users">User Admin</a>
-- <a href="#mail">Unix Mail</a>
-
-**Stupid Fun**
-- <a href="#fun-commands">Fun Fun</a>
-
-* * *
-
-## TEXT
+## Basics
 
 Text is the input and the output of almost every program that you use on 
 the command line. The redirection of that input and the output via communication
@@ -59,7 +39,7 @@ channels is the most powerful tool in Unix.
   + STDIN reads from the keyboard
   + STDOUT & STDERR write to the term window
 
-### Redirect I/O for a great good
+**Redirect I/O for a great good**
 
 - STDIN:
     + '<' allows you connect a program's STDIN to a file
@@ -86,13 +66,13 @@ channels is the most powerful tool in Unix.
       - find . -type f -name "*.php" 2> /dev/null
 
 
-## File System Hierarchy
+**File System Hierarchy**
 
 - EVERYTHING IS A FILE in Linux
 - Your speakers are located at /dev/dsp
 - The number of processor cores available to your system is located at /proc/cpuinfo
 
-### Run down of the FSH:
+**Run down of the FSH:**
 
 - `/`          — Root of the filesystem
 - `/bin`       — system binaries—computer needs to boot
@@ -116,7 +96,7 @@ channels is the most powerful tool in Unix.
 - `/var`       — data that chanes frequently is stored here (e.g. /var/log for log files /var/www/ for webservers)
 
 
-## env
+**Environment**
 
 `env` is used to either print a list of environment variables or run 
 another utility in an altered environment without having to modify the 
@@ -142,20 +122,21 @@ Command Examples:
 - check if a program is installed and in system path <br /> `which <program_name>`
 
 
-<hr />
+## Searching
 
+**Find**
 
-FIND
-========
 - Find stuff in the Filesystem Heirarchy
 - Usually located at /usr/bin/find
 - Searches recursivly below specified search path
 - more info and examples: man find
 
-  find <search_path> [options]
+```Shell
+find <search_path> [options]
+```
 
-Command Examples:
-----------
+**Command Examples:**
+
 - Find a file name 'cats.txt' below current directory | `find . -name 'cats.txt'`
 - Find all files below current directory              | `find . -type f`
 - Find all directories below current directory        | `find . -type d`
@@ -171,8 +152,8 @@ Command Examples:
 - Remove all files in /tmp older than 2 days          | `find /tmp -maxdepth 1 -type f -mtime +2 -exec rm -i "{}" \;`
 
 
-GREP – sorting output
-=====
+**Grep** – Global/Regular-Expression/Print
+
 - Grep (g/re/p) stands for global regular-expression print. Its name is
   derived from a command in "ed" a Unix line-editor built in 1971.
 - use flag i for case insensitve search
@@ -180,8 +161,8 @@ GREP – sorting output
 - use flag P to use Perl-Compatible Regular Expressions (still "Highly Experimental" ::eye-roll::)
 - use flag c to count matches (or pipe to wc -l [word-count lines - see man wc for details])
 
-Grep Examples:
-------
+**Grep Examples:**
+
 - Find out if Apache is running
   - On CentOS                                                       | `ps aux | grep -i httpd`
   - On Debian                                                       | `ps aux | grep -i apache`
@@ -196,8 +177,7 @@ Grep Examples:
 - What shell is dave using?                                             | `cat /etc/passwd | grep dave | cut -d: -f7`
 
 
-ACK – code search
-======
+**Ack** – Better than Grep
 - Ack searches files below the current directory
   recursively. It's ideal for use with code since
   it automatically excludes any .svn, .git or .cvs
@@ -208,39 +188,37 @@ ACK – code search
   on debian: apt-get install ack-grep
   on centos: yum install ack
 
-Ack Examples:
--------
+**Ack Examples:**
+
 - search for a pattern in all files recursively     | `ack <pattern>`
 - search for a pattern recursively case-insensitive | `ack <pattern>`
 - search php files for thing recursively            | `ack --php <pattern>`
 - search all files except javascript files          | `ack --nojs <pattern>`
 
+## Manipulating Text Output
 
-<hr />
+**Cut**:
 
-
-CUT 
-=====
 - Print a column base on a delimeter
 - The default delimeter is the tab character
 - Works with Pipes to STDIN
 - Useage: `cut -d "<delimeter" -f "<field>"`
 
-Command Examples:
----------
+_Command Examples:_
+
 - `/etc/passwd` is delimited by ":" so… first column | `cat /etc/passwd | cut -d ":" -f $1`
 - `/etc/passwd` 7th column                           | `cat /etc/passwd | cut -d ":" -f $7`
 
 
-SED – find and replace
-=======
+**Sed** – Ed Substitution:
+
 - Used to find and replace in text stream
 - Can be used to append to a file after or before a given pattern
 - I mainly use it with Unix Pipes (e.g., with STDIN)
 - http://sed.sourceforge.net/sed1line.txt
 
-Command Examples:
------------
+_Command Examples:_
+
 - Change day into night in a file                        | `cat <somefile.txt> | sed -e 's/day/night/g' > newfile.txt`
 - ReName all text files to <whatever>-old.txt            | `find . -maxdepth 1 -type f -iname '*.txt' | sed -e 's,\(\(.*\).txt\),mv "\1" "\2-old.txt",g' | /bin/bash`
 - ReName all those text files back to <whatever>-old.txt | `find . -maxdepth 1 -type f -iname '*.txt' | sed -e 's,\(.*\)-old.txt,mv "\0" "\1.txt",g' | /bin/bash`
@@ -262,22 +240,28 @@ Command Examples:
 - Print all lines between n1 and n2 | `sed -n 'n1,n2p'`
 
 
-AWK – Like sed but different
-=====
+**Awk** – Like sed but different
+
 - I use a mix of cut, sed and grep instead of Awk
 - Usage examples: http://www.thegeekstuff.com/2010/01/awk-introduction-tutorial-7-awk-print-examples/
 - Oneliners: http://www.pement.org/awk/awk1line.txt
 - **AWK tutorial**—http://www.grymoire.com/Unix/Awk.html
 
-* * *
+## System Administration
 
-## Shell Startup Files
+**Shell Startup Files**
 
-### Login scripts
+The order in which Shell startup scripts are run and which scripts are run
+varies based on whether you are:
 
-#### On Linux
+1. On a Mac or Linux Machine
+2. In a logon shell (TTY) or a Terminal Emulator (e.g., Gnome-Terminal)
+3. Running the shell interactively or from a script
+4. What shell you are running
 
-- BASH:
+_On Linux_
+
+- Bash:
   - via SSH:<br />
     `/etc/profile` &rarr; first of `~/.bash_profile`, `~/.bash_login`, `~/.profile` that exists
 
@@ -287,7 +271,7 @@ AWK – Like sed but different
   - scripts using `/usr/bin/env bash`:<br />
     looks for `$BASH_ENV` var and sources the expansion of that variable
 
-- ZSH:
+- Z-Shell:
   - via SSH:<br />
     `/etc/zshenv` &rarr; `~/.zshenv` &rarr; `/etc/zprofile` &rarr; `~/.zprofile` &rarr; `/etc/zshrc` &rarr; `~/.zshrc` &rarr; `/etc/zlogin` &rarr; `~/.zslogin`
 
@@ -300,27 +284,28 @@ AWK – Like sed but different
     `/etc/zshenv`
 
 
-#### On OSX
+_On OSX_
 
-- ZSH:
-  - Terminal, iTerm or SSH:<br />
-    `/etc/zshenv` &rarr; `~/.zshenv` &rarr; `/etc/zprofile` &rarr; `~/.zprofile` &rarr; `/etc/zshrc` &rarr; `~/.zshrc` &rarr; `/etc/zlogin` &rarr; `~/.zslogin`
-
-  - Scripts:<br />
-    `/etc/zshenv`
-
-- BASH:
+- Bash:
   - Terminal, iTerm or SSH:<br />
     `/etc/profile` &rarr; first of `~/.bash_profile`, `~/.bash_login`, `~/.profile` that exists
 
   - scripts using `/usr/bin/env bash`:<br />
     looks for `$BASH_ENV` var and sources the expansion of that variable
 
-## .inputrc
+
+- Z-Shell:
+  - Terminal, iTerm or SSH:<br />
+    `/etc/zshenv` &rarr; `~/.zshenv` &rarr; `/etc/zprofile` &rarr; `~/.zprofile` &rarr; `/etc/zshrc` &rarr; `~/.zshrc` &rarr; `/etc/zlogin` &rarr; `~/.zslogin`
+
+  - Scripts:<br />
+    `/etc/zshenv`
+
+**.inputrc**
 
 http://www.reddit.com/r/commandline/comments/kbeoe/you_can_make_readline_and_bash_much_more_user/
 
-## CRON
+**Cron Jobs**
 
 - Cronjobs are sheduled system tasks
 - Cronjobs are per user. 
@@ -328,7 +313,7 @@ http://www.reddit.com/r/commandline/comments/kbeoe/you_can_make_readline_and_bas
 - Crontab is the program used to manage cronjobs
 - To edit cronjobs use the command `crontab -e`
 
-### Cronjob Time Syntax:
+_Cronjob Time Syntax:_
 
 - m h dom m dow <what_to_do>
   - m - minute(0–59)
@@ -338,13 +323,15 @@ http://www.reddit.com/r/commandline/comments/kbeoe/you_can_make_readline_and_bas
   - dow - day-of-week(0–6)
   - <what_to_do> - anycommand
 
-### Crontab Examples:
+_Crontab Examples:_
+
 - Execute <command> every 15 minutes                   | `*/15 * * * * <command>`
 - Execute <command> at top of every hour on monday     | `0 * * * 1 <command>`
 - Execute <command> at 10 after, 15 after and 20 after | `10,15,20 * * * * <command>`
 
 
-## Adding Users:
+**Users**
+
 - Difference between adduser & useradd                                          | [tl;dr no difference in Centos, use useradd in debian](http://www.garron.me/en/go2linux/useradd-vs-adduser-ubuntu-linux.html)
 - Add a user                                                                    | `useradd <new_username>`
 - Add an existing user to a group                                               | `usermod -a -G <new_username>`
@@ -355,8 +342,8 @@ http://www.reddit.com/r/commandline/comments/kbeoe/you_can_make_readline_and_bas
 - Manage group permissions                                                      | `visudo` checkout lines that begin with `%<groupname>` or `<username>`
 
 
-Unix Mail
-===
+**Unix Mail**
+
 - `mail`
   takes you to the mailbox for your user
 - `help`
@@ -370,16 +357,12 @@ Unix Mail
 - `q`
   quits
 
+## Fun Commands
 
-<hr />
-
-
-Fun Commands
-==========
-- **Generate a list of your most used commands**— 
+- Generate a list of your most used commands— 
     ```bash
     history | sed "s/^[0-9 ]*//" | sed "s/ *| */\n/g" | awk '{print $1}' | sort | uniq -c | sort -rn | head -n 100 > commands.txt
     ```
-- **Nyan Cat**—`telnet miku.acm.uiuc.edu`
-- **RickRollrc**—`curl -L http://bit.ly/10hA8iC | bash`
-- **Star Wars**—`telnet towel.blinkenlights.nl`
+- Nyan Cat—`telnet miku.acm.uiuc.edu`
+- RickRollrc—`curl -L http://bit.ly/10hA8iC | bash`
+- Star Wars—`telnet towel.blinkenlights.nl`
