@@ -19,7 +19,8 @@ Catalog of information about Linux/Unix that I've found useful
 2. [Searching](#searching)
 3. [Manipulating Text](#manipulating-text-output)
 4. [System Administration](#system-administration)
-5. [Fun Commands](#fun-commands)
+5. [Development](#development)
+6. [Fun Commands](#fun-commands)
 
 ## Basics
 
@@ -357,6 +358,34 @@ _Crontab Examples:_
   deletes messages between 1 and 100
 - `q`
   quits
+
+
+## Development
+
+Commands that may be useful in development
+
+**cURL**
+
+Important flags:
+
+* `-X`: type either POST, GET, DELETE whatever
+* `-H`: header like 'x-someheader: header'
+* `-F`: form data e.g., `curl -F 'username=tyler'`
+* `Files`: use `-F` with `@` e.g., `curl -F 'file_is=@/path/to/file'`
+
+_Command Examples:_
+
+1. POST username and password:
+
+```Shell
+curl -X 'POST' -F 'username=tyler' -F 'password=pass123' www.example.com/login
+```
+
+2. Upload file with required `Accept` header
+
+```Shell
+curl -X 'POST' -H 'Accept: application/json' -F 'file_name=Test File' -F 'file_contents=@/path/to/file.type' www.example.com/file/add
+```
 
 ## Fun Commands
 
