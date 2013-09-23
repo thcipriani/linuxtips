@@ -11,7 +11,7 @@ Catalog of information about Linux/Unix that I've found useful
 >    – Douglas McIlroy
 
 >"Unix is simple. It just takes a genius to understand its simplicity." <br />
->    – Dennis Ritchie, Invetor of the C Programming Language
+>    – Dennis Ritchie, Inventor of the C Programming Language
 
 ## Table of Contents
 
@@ -20,7 +20,8 @@ Catalog of information about Linux/Unix that I've found useful
 3. [Manipulating Text](#manipulating-text-output)
 4. [System Administration](#system-administration)
 5. [Development](#development)
-6. [Fun Commands](#fun-commands)
+6. [Portability](#portability)
+7. [Fun Commands](#fun-commands)
 
 ## Basics
 
@@ -409,6 +410,13 @@ curl -X 'POST' -F 'username=tyler' -F 'password=pass123' www.example.com/login
 ```Shell
 curl -X 'POST' -H 'Accept: application/json' -F 'file_name=Test File' -F 'file_contents=@/path/to/file.type' www.example.com/file/add
 ```
+
+## Portability
+
+**`echo` vs `printf`**
+
+Always use `printf` in shell scripting. See discussion on 
+[StackExchange](http://unix.stackexchange.com/questions/65803/why-is-printf-better-than-echo)
 
 ## Fun Commands
 
