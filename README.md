@@ -303,6 +303,29 @@ _On OSX_
   - Scripts:<br />
     `/etc/zshenv`
 
+**Hostname**
+
+- Setting your hostname
+  - Debian and Ubuntu:
+
+    Edit `/etc/hostname` and add you unqualified hostname, e.g., `echo "parabola" > /etc/hostname` 
+
+    Edit `/etc/hosts`:
+
+    ```
+    sudo vim /etc/hosts
+    ```
+
+    Add an entry of your desired hostname by replacing 
+    `parabola.tylercipriani.com parabola` where 
+    `parabola.tylercipriani.com` is the fully qualified hostname and 
+    `parabola`  hostname.
+
+    ```
+    127.0.1.1 parabola.tylercipriani.com parabola localhost
+    ```
+    test both of these with: `hostname` &amp; `hostname -f`
+
 **.inputrc**
 
 http://www.reddit.com/r/commandline/comments/kbeoe/you_can_make_readline_and_bash_much_more_user/
