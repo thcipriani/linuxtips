@@ -139,19 +139,89 @@ find <search_path> [options]
 
 _Command Examples:_
 
-- Find a file name 'cats.txt' below current directory | `find . -name 'cats.txt'`
-- Find all files below current directory              | `find . -type f`
-- Find all directories below current directory        | `find . -type d`
-- .txt files                                          | `find . -type f -name "*.txt"`
-- case insensitive file name                          | `find . -iname "nOtSuReOfCaSiNg.txt"`
-- txt files recursively to a depth of 2               | `find . -maxdepth 2 -type f -name "*.txt"`
-- All NON text files                                  | `find . -not -name "*.txt"`
-- Files modified less than a day ago                  | `find . -type f -mtime -1`
-- Directories modified more than 10 days ago          | `find . -type d -mtime +10`
-- All Files greater than 100 MB                       | `find . -type f -size +100M`
-- All files smaller than 10 KB                        | `find . -type f -size -10K`
-- Remove all zip files bigger than 100MB              | `find . -name "*.zip" -size +100M -exec rm -i "{}" \;`
-- Remove all files in /tmp older than 2 days          | `find /tmp -maxdepth 1 -type f -mtime +2 -exec rm -i "{}" \;`
+- Find a file name 'cats.txt' below current directory
+
+  ```Shell
+  find . -name 'cats.txt'
+  ```
+
+- Find all files below current directory
+
+  ```Shell
+  find . -type f
+  ```
+
+- Find all directories below current directory
+
+  ```Shell
+  find . -type d`
+  ```
+
+- .txt files
+
+  ```Shell
+  find . -type f -name "*.txt"
+  ```
+
+- case insensitive file name
+
+  ```Shell
+  find . -iname "nOtSuReOfCaSiNg.txt"
+  ```
+
+- txt files recursively to a depth of 2 
+
+  ```Shell
+  find . -maxdepth 2 -type f -name "*.txt"
+  ```
+
+- All NON text files
+
+  ```Shell
+  find . -not -name "*.txt"
+  ```
+
+- Files modified less than a day ago
+
+  ```Shell
+  find . -type f -mtime -1
+  ```
+
+- Directories modified more than 10 days ago
+
+  ```Shell
+  find . -type d -mtime +10
+  ```
+
+- All Files greater than 100 MB
+
+  ```Shell
+  find . -type f -size +100M
+  ```
+
+- All files smaller than 10 KB
+
+  ```Shell
+  find . -type f -size -10K
+  ```
+
+- Remove all zip files bigger than 100MB
+
+  ```Shell
+  find . -name "*.zip" -size +100M -exec rm -i "{}" \;
+  ```
+
+- Remove all files in /tmp older than 2 days
+
+  ```Shell
+  find /tmp -maxdepth 1 -type f -mtime +2 -exec rm -i "{}" \;
+  ```
+
+- Create a `.gitkeep` file in all empty directories:
+
+  ```Shell
+  find . -type d -empty -print0 | xargs -0 -I{} touch {}/.gitkeep
+  ```
 
 
 **Grep**
