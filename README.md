@@ -97,6 +97,24 @@ _Run down of the FSH:_
 - `/usr/sbin`  — more sysadmin binaries (e.g., /usr/sbin/usermod lets me modify a user)
 - `/var`       — data that chanes frequently is stored here (e.g. /var/log for log files /var/www/ for webservers)
 
+**The Shell**
+
+You access the command line through a shell. Most Linux distros default to
+using the Bash shell. Bash stands for Bourne Again SHell. Bourne refers to
+the Bourne shell, which was the default Unix shell in Unix Version 7.
+
+iTerm, Konsole, Terminal and the like are Terminal Emulators.
+
+A Shell runs inside of a terminal emulator.
+
+_Command Examples:_
+
+- check shell environment                            <br /> `cat /etc/passwd | grep `whoami` | cut -d ':' -f 7`
+- check what shell environments are installed        <br /> `cat /etc/shells`
+- change your default shell                          <br /> `chsh `whoami` -s <valid login shell>`
+- change another user’s shell                        <br /> `sudo chsh <username> -s <valid login shell>`
+- switch users                                       <br /> `su <username> (or su - to switch to root)`
+
 
 **Environment**
 
@@ -106,13 +124,11 @@ currently existing environment.
 
 `env` is usually located at `/usr/bin/env`
 
+`/usr/bin/env <whatever>/` is also a more portable way of running an executable.
+It also runs the first executable in a User's `$PATH` ([reference](http://unix.stackexchange.com/questions/29608/why-is-it-better-to-use-usr-bin-env-name-instead-of-path-to-name-as-my))
+
 _Command Examples:_
 
-- check shell environment                            <br /> `cat /etc/passwd | grep `whoami` | cut -d ':' -f 7`
-- check what shell environments are installed        <br /> `cat /etc/shells`
-- change your default shell                          <br /> `chsh `whoami` -s <valid login shell>`
-- change another user’s shell                        <br /> `sudo chsh <username> -s <valid login shell>`
-- switch users                                       <br /> `su <username> (or su - to switch to root)`
 - list all variables on your environment             <br /> `env`
 - set temp variable for shell session                <br /> `export VARNAME=value`
 - where env vars are set                             <br /> `/home/<username>/.bashrc`
@@ -169,13 +185,19 @@ _Command Examples:_
   find . -iname "nOtSuReOfCaSiNg.txt"
   ```
 
+- join find options with `-and` ex: find php files that start with cat
+
+  ```Shell
+  find . -iname "*.php" -and -iname "cat*"
+  ```
+
 - txt files recursively to a depth of 2 
 
   ```Shell
   find . -maxdepth 2 -type f -name "*.txt"
   ```
 
-- All NON text files
+- Exclude files with `-not` ex: find all NON-text files
 
   ```Shell
   find . -not -name "*.txt"
@@ -236,17 +258,17 @@ _Command Examples:_
 _Grep Examples:_
 
 - Find out if Apache is running
-  - On CentOS                                                       | `ps aux | grep -i httpd`
-  - On Debian                                                       | `ps aux | grep -i apache`
-- Find out how many instances of ffmpeg are running (wc -l counts lines)| `ps aux | grep -i ffmpeg | grep -v grep | wc -l`
-- Find text 'get_user' in all files below current dir with line numbers | `grep -HiERn 'get_user' .`
-- Same as above, don't include .svn directory                           | `grep -HiERn 'get_user' . | grep -v '.svn'`
-- How many proccessors does a system have                               | `grep -c CPU /proc/cpuinfo`
-- Same as above                                                         | `cat /proc/cpuinfo | grep -i cpu    | wc -l`
-- Same as above                                                         | `grep -i cpu /proc/cpuinfo | wc -l`
-- How many users are on a system besides you?                           | `grep -cv `whoami` /etc/passwd`
-- Same number as above + 1 (total system users)                         | `cat /etc/passwd | wc -l`
-- What shell is dave using?                                             | `cat /etc/passwd | grep dave | cut -d: -f7`
+  - On CentOS                                                            <br> `ps aux | grep -i httpd`
+  - On Debian                                                            <br> `ps aux | grep -i apache`
+- Find out how many instances of ffmpeg are running (wc -l counts lines) <br> `ps aux | grep -i ffmpeg | grep -v grep | wc -l`
+- Find text 'get_user' in all files below current dir with line numbers  <br> `grep -HiERn 'get_user' .`
+- Same as above, don't include .svn directory                            <br> `grep -HiERn 'get_user' . | grep -v '.svn'`
+- How many proccessors does a system have                                <br> `grep -c CPU /proc/cpuinfo`
+- Same as above                                                          <br> `cat /proc/cpuinfo | grep -i cpu    | wc -l`
+- Same as above                                                          <br> `grep -i cpu /proc/cpuinfo | wc -l`
+- How many users are on a system besides you?                            <br> `grep -cv `whoami` /etc/passwd`
+- Same number as above + 1 (total system users)                          <br> `cat /etc/passwd | wc -l`
+- What shell is dave using?                                              <br> `cat /etc/passwd | grep dave | cut -d: -f7`
 
 
 **Ack**
@@ -263,10 +285,17 @@ _Grep Examples:_
 
 _Ack Examples:_
 
-- search for a pattern in all files recursively     | `ack <pattern>`
-- search for a pattern recursively case-insensitive | `ack <pattern>`
-- search php files for thing recursively            | `ack --php <pattern>`
-- search all files except javascript files          | `ack --nojs <pattern>`
+- search for a pattern in all files recursively     <br> `ack <pattern>`
+- search for a pattern recursively case-insensitive <br> `ack <pattern>`
+- search php files for thing recursively            <br> `ack --php <pattern>`
+- search all files except javascript files          <br> `ack --nojs <pattern>`
+
+
+**Silver Searcher (ag)**
+
+- Works mostly like `Ack` except it's 3–5× faster
+
+[get it](https://github.com/ggreer/the_silver_searcher)
 
 ## Manipulating Text Output
 
@@ -338,7 +367,7 @@ _On Linux_
   - via SSH:<br />
     `/etc/profile` &rarr; first of `~/.bash_profile`, `~/.bash_login`, `~/.profile` that exists
 
-  - via Terminal-type program:<br />
+  - via Terminal Emulator:<br />
     `/etc/bash.bashrc` &rarr; `.bashrc`
 
   - scripts using `/usr/bin/env bash`:<br />
@@ -350,7 +379,7 @@ _On Linux_
 
   - `/etc/z*` is the default; however `/etc/zsh/z*` seems to be common (at least on Ubuntu)
 
-  - via Terminal-type program:<br />
+  - via Terminal Emulator:<br />
     `/etc/zshrc` &rarr; `~/.zshrc`
 
   - Scripts:<br />
@@ -381,6 +410,8 @@ _On OSX_
 
     Edit `/etc/hostname` and add you unqualified hostname, e.g., `echo "parabola" > /etc/hostname` 
 
+    Run `hostname -F /etc/hostname` to update your hostname
+
     Edit `/etc/hosts`:
 
     ```
@@ -390,7 +421,7 @@ _On OSX_
     Add an entry of your desired hostname by replacing 
     `parabola.tylercipriani.com parabola` where 
     `parabola.tylercipriani.com` is the fully qualified hostname and 
-    `parabola`  hostname.
+    `parabola` is the hostname.
 
     ```
     127.0.1.1 parabola.tylercipriani.com parabola localhost
@@ -421,35 +452,69 @@ _Cronjob Time Syntax:_
 
 _Crontab Examples:_
 
-- Execute <command> every 15 minutes                   | `*/15 * * * * <command>`
-- Execute <command> at top of every hour on monday     | `0 * * * 1 <command>`
-- Execute <command> at 10 after, 15 after and 20 after | `10,15,20 * * * * <command>`
+- Execute <command> every 15 minutes                   <br> `*/15 * * * * <command>`
+- Execute <command> at top of every hour on monday     <br> `0 * * * 1 <command>`
+- Execute <command> at 10 after, 15 after and 20 after <br> `10,15,20 * * * * <command>`
 
 
 **Users**
 
-- Difference between adduser & useradd                                          | [tl;dr no difference in Centos, use useradd in debian](http://www.garron.me/en/go2linux/useradd-vs-adduser-ubuntu-linux.html)
-- Add a user                                                                    | `useradd <new_username>`
-- Add an existing user to a group                                               | `usermod -a -G <new_username>`
-- Find group ids for a user                                                     | `id -G <username>`
-- Find groupnames for a user                                                    | `groups <username>`
-- Edit defaults for adding a user (e.g., the user's shell, default group etc)   | `sudo vim /etc/default/useradd`
-- Edit default files created for a user (e.g., .profile, .bashrc, .vimrc, etc ) | `sudo cp <file_to_add> /etc/skel/`
-- Manage group permissions                                                      | `visudo` checkout lines that begin with `%<groupname>` or `<username>`
+- Difference between adduser & useradd                                          <br> [tl;dr no difference in Centos, use useradd in debian](http://www.garron.me/en/go2linux/useradd-vs-adduser-ubuntu-linux.html)
+- Add a user                                                                    <br> `useradd <new_username>`
+- Add an existing user to a group                                               <br> `usermod -a -G <new_username>`
+- Find group ids for a user                                                     <br> `id -G <username>`
+- Find groupnames for a user                                                    <br> `groups <username>`
+- Edit defaults for adding a user (e.g., the user's shell, default group etc)   <br> `sudo vim /etc/default/useradd`
+- Edit default files created for a user (e.g., .profile, .bashrc, .vimrc, etc ) <br> `sudo cp <file_to_add> /etc/skel/`
+- Manage group permissions                                                      <br> `visudo` checkout lines that begin with `%<groupname>` or `<username>`
 
 
 **Unix Mail**
 
 - `mail`
-  takes you to the mailbox for your user
-- `help`
+  `mail` is a Mail User Agent for Unix systems. This program is typically 
+  located in `/usr/bin/mail`; however, this program is, often, a symlink
+  (sometimes through `updatealternatives`) to `mailx`.
+
+  When sending mail the `mail` command uses `sendmail`. As do most 
+  command-line ways of sending mail.
+
+  [More info](http://publib.boulder.ibm.com/infocenter/pseries/v5r3/index.jsp?topic=/com.ibm.aix.cmds/doc/aixcmds3/mail.htm)
+
+_Command Examples and Use_:
+
+- View your mailbox:
+
+  `mail`
+
+- View your mailbox:
+
+  `mail`
+
+- Send mail:
+
+  `echo "Message Body" | mail -s "Mail Subject" user@example.com
+
+- Send mail to multiple people:
+
+  `echo "Message Body" | mail -s "Mail Subject" -c "user2@example.com user3@example.com" user@example.com
+
+_Mailbox Subcommands_
+- `help` or `?`
   inside the mail program shows you mail help
+
 - `h`
   shows message headers
+
 - `d`
   deletes a message
+
 - `d 1-100`
   deletes messages between 1 and 100
+
+- `dp`
+  Delete current message and display next message
+
 - `q`
   quits
 
@@ -488,12 +553,38 @@ curl -X 'POST' -H 'Accept: application/json' -F 'file_name=Test File' -F 'file_c
 Always use `printf` in shell scripting. See discussion on 
 [StackExchange](http://unix.stackexchange.com/questions/65803/why-is-printf-better-than-echo)
 
+**CheckBashisms**
+
+Perl script to check for non-POSIX-compliance available in the [debian repo](http://debian.inode.at/debian/pool/main/d/devscripts/)
+
+[ShellCheck](http://www.shellcheck.net/)
+
 ## Fun Commands
+
+Linux Fun Crap
 
 - Generate a list of your most used commands— 
     ```bash
     history | sed "s/^[0-9 ]*//" | sed "s/ *| */\n/g" | awk '{print $1}' | sort | uniq -c | sort -rn | head -n 100 > commands.txt
     ```
-- Nyan Cat—`telnet miku.acm.uiuc.edu`
-- RickRollrc—`curl -L http://bit.ly/10hA8iC | bash`
-- Star Wars—`telnet towel.blinkenlights.nl`
+- The Useless Use of `cat` Award ([partmaps](http://partmaps.org/era/unix/award.html#cat))
+- Terminal Keynote (Ruby) ([github](https://github.com/fxn/tkn))
+- Boom. Motherfucking Text Snippets on the command line ([zachhholman](http://zachholman.com/boom/))
+- Spark sparklines for your shell ([zachholman](http://zachholman.com/spark/))
+- Lolcat ([github](https://github.com/busyloop/lolcat))
+- cowsay ([github](https://github.com/schacon/cowsay))
+- Ponysay ([github](https://github.com/erkin/ponysay))
+- FIGlet ([figlet](http://www.figlet.org/))
+- Libcaca ([caca.zoy](http://caca.zoy.org/wiki/libcaca))
+- Toilet ([caca.zoy](http://caca.zoy.org/wiki/toilet))
+- Boxes ([thomasjensen](http://boxes.thomasjensen.com/))
+- Cadubi (perl) ([langworth](http://langworth.com/pub/cadubi/))
+- img2txt ([hit9](http://hit9.org/img2txt/))
+- Nyancat ([klange.github](https://github.com/klange/nyancat))
+- CMatrix ([asty](http://www.asty.org/cmatrix/))
+- janbrennen rice ([github](https://github.com/janbrennen/rice))
+- dotshare.it ([dotshare.it](http://dotshare.it))
+- linux logo ([freecode](http://freecode.com/projects/linuxlogo))
+- bb ([aa-project](http://aa-project.sourceforge.net/bb/))
+- Powerline Font symbols ([powerline](https://powerline.readthedocs.org/en/latest/fontpatching.html))
+- Stupid Programmer Tricks/Starwars gifs ([rarlindseysmash](http://rarlindseysmash.com/posts/stupid-programmer-tricks-and-star-wars-gifs))
