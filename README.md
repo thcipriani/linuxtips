@@ -471,8 +471,7 @@ _Crontab Examples:_
 
 **Unix Mail**
 
-- `mail`
-  `mail` is a Mail User Agent for Unix systems. This program is typically 
+- `mail` is a Mail User Agent for Unix systems. This program is typically 
   located in `/usr/bin/mail`; however, this program is, often, a symlink
   (sometimes through `updatealternatives`) to `mailx`.
 
@@ -485,19 +484,21 @@ _Command Examples and Use_:
 
 - View your mailbox:
 
-  `mail`
-
-- View your mailbox:
-
-  `mail`
+  ```
+  mail
+  ```
 
 - Send mail:
 
-  `echo "Message Body" | mail -s "Mail Subject" user@example.com
+  ```
+  echo "Message Body" | mail -s "Mail Subject" user@example.com
+  ```
 
 - Send mail to multiple people:
 
-  `echo "Message Body" | mail -s "Mail Subject" -c "user2@example.com user3@example.com" user@example.com
+  ```
+  echo "Message Body" | mail -s "Mail Subject" -c "user2@example.com user3@example.com" user@example.com
+  ```
 
 _Mailbox Subcommands_
 - `help` or `?`
@@ -564,9 +565,11 @@ Perl script to check for non-POSIX-compliance available in the [debian repo](htt
 Linux Fun Crap
 
 - Generate a list of your most used commands— 
-    ```bash
-    history | sed "s/^[0-9 ]*//" | sed "s/ *| */\n/g" | awk '{print $1}' | sort | uniq -c | sort -rn | head -n 100 > commands.txt
-    ```
+
+  ```
+  history | sed "s/^[0-9 ]*//" | sed "s/ *| */\n/g" | awk '{print $1}' | sort | uniq -c | sort -rn | head -n 100 > commands.txt
+  ```
+
 - The Useless Use of `cat` Award ([partmaps](http://partmaps.org/era/unix/award.html#cat))
 - Terminal Keynote (Ruby) ([github](https://github.com/fxn/tkn))
 - Boom. Motherfucking Text Snippets on the command line ([zachhholman](http://zachholman.com/boom/))
