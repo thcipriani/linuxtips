@@ -1,8 +1,7 @@
 ---
 layout: default
-title: Unix Tips
+title: Linux Tips
 ---
-
 # Unix Tips
 
 Catalog of information about Linux/Unix that I've found useful

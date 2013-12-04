@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+git show master:README.md > ../index.md
+sed '1  i\
+---\
+layout: default\
+title: Linux Tips\
+---\
+' ../index.md > tmpfile
+
+mv tmpfile ../index.md
+
+printf "$(tput setaf 2) Updated index! $(tput sgr0)\n";
