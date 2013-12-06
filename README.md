@@ -48,28 +48,13 @@ Shell Startup Files:
 - OSX/ZShell/Scripts (/usr/bin/env zsh):<br>
   `/etc/zshenv`
 
-Setting your hostname
-  - Debian and Ubuntu:
+Setting your hostname&#8212;Debian and Ubuntu:
 
-    Edit `/etc/hostname` and add you unqualified hostname, e.g., `echo "parabola" > /etc/hostname` 
+1. Edit `/etc/hostname` and add you unqualified hostname, e.g., `echo "parabola" > /etc/hostname` 
+2. Run `hostname -F /etc/hostname` to update your hostname
+3. Edit `/etc/hosts`:
 
-    Run `hostname -F /etc/hostname` to update your hostname
-
-    Edit `/etc/hosts`:
-
-    ```
-    sudo vim /etc/hosts
-    ```
-
-    Add an entry of your desired hostname by replacing 
-    `parabola.tylercipriani.com parabola` where 
-    `parabola.tylercipriani.com` is the fully qualified hostname and 
-    `parabola` is the hostname.
-
-    ```
     127.0.1.1 parabola.tylercipriani.com parabola localhost
-    ```
-    test both of these with: `hostname` &amp; `hostname -f`
 
 Cronjob Time Syntax:
 
@@ -97,13 +82,15 @@ Fill login form via cURL
 
     curl -X 'POST' -F 'username=tyler' -F 'password=pass123' www.example.com/login
 
+Git show contents of stash
+
+  git stash show -p stash@{1}
+
 Linux Fun Crap
 
 - Generate a list of your most used commands— 
 
-  ```
-  history | sed "s/^[0-9 ]*//" | sed "s/ *| */\n/g" | awk '{print $1}' | sort | uniq -c | sort -rn | head -n 100 > commands.txt
-  ```
+    history | sed "s/^[0-9 ]*//" | sed "s/ *| */\n/g" | awk '{print $1}' | sort | uniq -c | sort -rn | head -n 100 > commands.txt
 
 - The Useless Use of `cat` Award ([partmaps](http://partmaps.org/era/unix/award.html#cat))
 - Terminal Keynote (Ruby) ([github](https://github.com/fxn/tkn))
