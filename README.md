@@ -86,6 +86,10 @@ Git show contents of stash
 
   git stash show -p stash@{1}
 
+Rip a whole site with wget:
+
+  wget --recursive --no-clobber --page-requisites --html-extension --convert-links --restrict-file-names=windows --domains <domain-name> --no-parent http://<domain>
+
 Linux Fun Crap
 
 - Generate a list of your most used commands— 
