@@ -8,6 +8,10 @@ Locale Settings:
     export LANG=en_US.UTF-8
     export LC_ALL=en_US.UTF-8
 
+Process Tree:
+
+    pstree -p
+
 Create a `.gitkeep` file in all empty directories:
 
     find . -type d -empty -print0 | xargs -0 -I{} touch {}/.gitkeep
@@ -98,7 +102,11 @@ IPTables
 
 Rip a whole site with wget:
 
-  wget --recursive --no-clobber --page-requisites --html-extension --convert-links --restrict-file-names=windows --domains <domain-name> --no-parent http://<domain>
+    wget --recursive --no-clobber --page-requisites --html-extension --convert-links --restrict-file-names=windows --domains <domain-name> --no-parent http://<domain>
+
+Debug bash scripts, add:
+
+    set -x
 
 Linux Fun Crap
 
