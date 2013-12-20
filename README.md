@@ -84,7 +84,17 @@ Fill login form via cURL
 
 Git show contents of stash
 
-  git stash show -p stash@{1}
+    git stash show -p stash@{1}
+
+IPTables
+
+- Block an IPAddress
+  
+    iptables -A INPUT -s "$BLOCK_THIS_IP" -j DROP
+
+- Insert a rule to allow inbound tcp traffic on port 8000 (puts the rule at the top)
+
+    iptables -I INPUT -i eth0 -p tcp --dport 8000 -j ACCEPT
 
 Rip a whole site with wget:
 
