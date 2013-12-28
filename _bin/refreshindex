@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
-git show master:README.md > ../index.md
+
+if [ "$(basename $PWD)" != '_bin' ]; then
+  printf "$(tput setaf 1)[ERROR]$(tput sgr0)Must be executed from the _bin directory\n" 1>&2
+  exit 1
+fi
+
+git show origin/master:README.md > ../index.md
 sed '1  i\
 ---\
 layout: default\
