@@ -125,6 +125,19 @@ Wget/cURL
 
     curl -X 'POST' -F 'username=tyler' -F 'password=pass123' www.example.com/login
 
+MySQL
+
+- Single DB Dump
+
+    mysqldump --compress -h localhost --quick --single-transaction [db_name] > [dumpfile]
+
+- Nice DB Dump
+
+    mysqldump -h localhost -u [username] -p --add-drop-database --skip-comments --routines --compress --quick --single-transaction --databases [db_name] > [dumpfile]
+
+- Dump tables that match pattern:
+
+    mysqldump -h localhost --quick --single-transaction [db_name] `mysql -ND [db_name] -h localhost -e "show tables like '[pattern]'" | awk '{ printf $1" " }'` > dumpfile.sql
 
 Debug bash scripts, add:
 
