@@ -78,14 +78,6 @@ Send mail to multiple people:
 
     echo "Message Body" | mail -s "Mail Subject" -c "user2@example.com user3@example.com" user@example.com
 
-Upload file via cURL
-
-    curl -X 'POST' -H 'Accept: application/json' -F 'file_name=Test File' -F 'file_contents=@/path/to/file.type' www.example.com/file/add
-
-Fill login form via cURL
-
-    curl -X 'POST' -F 'username=tyler' -F 'password=pass123' www.example.com/login
-
 Git show contents of stash
 
     git stash show -p stash@{1}
@@ -100,9 +92,34 @@ IPTables
 
     iptables -I INPUT -i eth0 -p tcp --dport 8000 -j ACCEPT
 
-Rip a whole site with wget:
+Tar (Tape Archive Utility)
+
+- Create gzipped tar from file or directory
+
+    tar -cvzf tarfile.tar.gz directory file otherfile
+
+- Create bzipped tar file from file or directory
+
+    tar -cvjf tarfile.tar.bz2 directory file otherfile
+
+- List contents of tar.gz file
+
+    tar -tvzf tarfile.tar.gz
+
+Wget/cURL
+
+- Rip a whole site with wget:
 
     wget --recursive --no-clobber --page-requisites --html-extension --convert-links --restrict-file-names=windows --domains <domain-name> --no-parent http://<domain>
+
+- Upload file via cURL
+
+    curl -X 'POST' -H 'Accept: application/json' -F 'file_name=Test File' -F 'file_contents=@/path/to/file.type' www.example.com/file/add
+
+- Fill login form via cURL
+
+    curl -X 'POST' -F 'username=tyler' -F 'password=pass123' www.example.com/login
+
 
 Debug bash scripts, add:
 
