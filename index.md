@@ -143,6 +143,14 @@ Debug bash scripts, add:
 
     set -x
 
+Forward new port in existing SSH session:
+
+```
+<newline>
+~C
+ssh> ?
+```
+
 Linux Fun Crap
 
 - Generate a list of your most used commands— 
