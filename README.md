@@ -146,6 +146,37 @@ Forward new port in existing SSH session:
 ssh> ?
 ```
 
+List currently established, closed, orphaned and waiting TCP sockets:
+
+```
+ss -s
+```
+
+`netstat -tlnp` vs `ss -ln`
+
+```
+$ time netstat -tlnp                                                                                                   127 ↵
+netstat -tlnp  0.00s user 0.02s system 97% cpu 0.016 total
+
+$ time ss -ln       
+ss -ln  0.00s user 0.00s system 83% cpu 0.005 total
+```
+
+Check disk I/O:
+```
+vmstat 1 10
+```
+
+What's using disk I/O:
+```
+dstat --top-io --top-bio
+```
+
+Show io per-device (needs sysstat package on debian):
+```
+iostat -sk 2
+```
+
 Linux Fun Crap
 
 - Generate a list of your most used commands— 
