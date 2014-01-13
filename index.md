@@ -9,21 +9,29 @@ This is a list of things I either think are neat, or things I'm always Googling.
 
 Locale Settings:
 
-    export LANGUAGE=en_US.UTF-8
-    export LANG=en_US.UTF-8
-    export LC_ALL=en_US.UTF-8
+```
+export LANGUAGE=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+```
 
 Process Tree:
 
-    pstree -p
+```
+pstree -p
+```
 
 Create a `.gitkeep` file in all empty directories:
 
-    find . -type d -empty -print0 | xargs -0 -I{} touch {}/.gitkeep
+```
+find . -type d -empty -print0 | xargs -0 -I{} touch {}/.gitkeep
+```
 
 Remove all files in /tmp older than 2 days
 
-    find /tmp -maxdepth 1 -type f -mtime +2 -exec rm -i "{}" \;
+```
+find /tmp -maxdepth 1 -type f -mtime +2 -exec rm -i "{}" \;
+```
 
 Shell Startup Files:
 
@@ -77,71 +85,101 @@ Cronjob Time Syntax:
 
 Send mail
 
-    echo "Message Body" | mail -s "Mail Subject" user@example.com
+```
+echo "Message Body" | mail -s "Mail Subject" user@example.com
+```
 
 Send mail to multiple people:
 
-    echo "Message Body" | mail -s "Mail Subject" -c "user2@example.com user3@example.com" user@example.com
+```
+echo "Message Body" | mail -s "Mail Subject" -c "user2@example.com user3@example.com" user@example.com
+```
 
 Git show contents of stash
 
-    git stash show -p stash@{1}
+```
+git stash show -p stash@{1}
+```
 
 IPTables
 
 - Block an IPAddress
   
-    iptables -A INPUT -s "$BLOCK_THIS_IP" -j DROP
+  ```
+  iptables -A INPUT -s "$BLOCK_THIS_IP" -j DROP
+  ```
 
 - Insert a rule to allow inbound tcp traffic on port 8000 (puts the rule at the top)
 
-    iptables -I INPUT -i eth0 -p tcp --dport 8000 -j ACCEPT
+  ```
+  iptables -I INPUT -i eth0 -p tcp --dport 8000 -j ACCEPT
+  ```
 
 Tar (Tape Archive Utility)
 
 - Create gzipped tar from file or directory
 
-    tar -cvzf tarfile.tar.gz directory file otherfile
+  ```
+  tar -cvzf tarfile.tar.gz directory file otherfile
+  ```
 
 - Create bzipped tar file from file or directory
 
-    tar -cvjf tarfile.tar.bz2 directory file otherfile
+  ```
+  tar -cvjf tarfile.tar.bz2 directory file otherfile
+  ```
 
 - List contents of tar.gz file
 
-    tar -tvzf tarfile.tar.gz
+  ```
+  tar -tvzf tarfile.tar.gz
+  ```
 
 Wget/cURL
 
 - Rip a whole site with wget:
 
-    wget --recursive --no-clobber --page-requisites --html-extension --convert-links --restrict-file-names=windows --domains <domain-name> --no-parent http://<domain>
+  ```
+  wget --recursive --no-clobber --page-requisites --html-extension --convert-links --restrict-file-names=windows --domains <domain-name> --no-parent http://<domain>
+  ```
 
 - Upload file via cURL
 
-    curl -X 'POST' -H 'Accept: application/json' -F 'file_name=Test File' -F 'file_contents=@/path/to/file.type' www.example.com/file/add
+  ```
+  curl -X 'POST' -H 'Accept: application/json' -F 'file_name=Test File' -F 'file_contents=@/path/to/file.type' www.example.com/file/add
+  ```
 
 - Fill login form via cURL
 
-    curl -X 'POST' -F 'username=tyler' -F 'password=pass123' www.example.com/login
+  ```
+  curl -X 'POST' -F 'username=tyler' -F 'password=pass123' www.example.com/login
+  ```
 
 MySQL
 
 - Single DB Dump
 
-    mysqldump --compress -h localhost --quick --single-transaction [db_name] > [dumpfile]
+  ```
+  mysqldump --compress -h localhost --quick --single-transaction [db_name] > [dumpfile]
+  ```
 
 - Nice DB Dump
 
-    mysqldump -h localhost -u [username] -p --add-drop-database --skip-comments --routines --compress --quick --single-transaction --databases [db_name] > [dumpfile]
+  ```
+  mysqldump -h localhost -u [username] -p --add-drop-database --skip-comments --routines --compress --quick --single-transaction --databases [db_name] > [dumpfile]
+  ```
 
 - Dump tables that match pattern:
 
-    mysqldump -h localhost --quick --single-transaction [db_name] `mysql -ND [db_name] -h localhost -e "show tables like '[pattern]'" | awk '{ printf $1" " }'` > dumpfile.sql
+  ```
+  mysqldump -h localhost --quick --single-transaction [db_name] `mysql -ND [db_name] -h localhost -e "show tables like '[pattern]'" | awk '{ printf $1" " }'` > dumpfile.sql
+  ```
 
 Debug bash scripts, add:
 
-    set -x
+```
+set -x
+```
 
 Forward new port in existing SSH session:
 
@@ -168,16 +206,19 @@ ss -ln  0.00s user 0.00s system 83% cpu 0.005 total
 ```
 
 Check disk I/O:
+
 ```
 vmstat 1 10
 ```
 
 What's using disk I/O:
+
 ```
 dstat --top-io --top-bio
 ```
 
 Show io per-device (needs sysstat package on debian):
+
 ```
 iostat -sk 2
 ```
