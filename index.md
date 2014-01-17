@@ -223,6 +223,12 @@ Show io per-device (needs sysstat package on debian):
 iostat -sk 2
 ```
 
+Download missing depedencies automatically on Debian/Ubuntu:
+
+```
+sudo apt-get -f install
+```
+
 Linux Fun Crap
 
 - Generate a list of your most used commands— 
