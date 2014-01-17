@@ -229,6 +229,24 @@ Download missing depedencies automatically on Debian/Ubuntu:
 sudo apt-get -f install
 ```
 
+Insert text at beginning of file without sed:
+
+```
+cat [file] | perl -pe 'BEGIN { print "[text]\n" }' > [outputfile]
+```
+
+Insert text without abusing cat in perl (with backup file):
+
+```
+perl -i.bak -pe 'print "[text]\n" if $. == 1;' [file]
+```
+
+Insert text at the end of the file with perl (with backup file):
+
+```
+perl -i.bak -ne 'print $_; print "[text]\n" if eof;' [file]
+```
+
 Linux Fun Crap
 
 - Generate a list of your most used commands— 
