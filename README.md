@@ -54,7 +54,7 @@ Shell Startup Files:
 
 Setting your hostname&#8212;Debian and Ubuntu:
 
-1. Edit `/etc/hostname` and add you unqualified hostname, e.g., `echo "parabola" > /etc/hostname` 
+1. Edit `/etc/hostname` and add you FQDN, e.g., `echo "parabola.tylercipriani.com" > /etc/hostname` 
 2. Run `hostname -F /etc/hostname` to update your hostname
 3. Edit `/etc/hosts`:
 
