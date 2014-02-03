@@ -193,6 +193,10 @@ Show compile flags for Nginx:
 
     nginx -V 2>&1 | tr -- - '\n' | grep _module
 
+Linux print:
+
+    lp -h [cups_server]:[cups_port:-631] -d [destination_printer_name] -o [print_job_options] [filename]
+
 Linux Fun Crap
 
 - Generate a list of your most used commands— 
