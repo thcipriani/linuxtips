@@ -197,6 +197,28 @@ Linux print:
 
     lp -h [cups_server]:[cups_port:-631] -d [destination_printer_name] -o [print_job_options] [filename]
 
+Check Shared Memory Segments:
+
+    ipcs -m
+
+Find process attached to shared memory segment
+
+    lsof | grep [shmid from ipcs]
+
+Stop space splitting for file in bash:
+
+```shell
+#!/usr/bin/env bash
+SAVEIFS=$IFS
+IFS=$(echo -en "\n\b")
+
+for file in $(find . -name 'file'); do
+  ...
+done
+
+IFS=$SAVEIFS
+```
+
 Linux Fun Crap
 
 - Generate a list of your most used commands— 
