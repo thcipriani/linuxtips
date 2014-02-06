@@ -519,9 +519,6 @@ _Mailbox Subcommands_
 - `q`
   quits
 
-Check Shared Memory Segments:
-ipcs -m
-
 ## Development
 
 Commands that may be useful in development

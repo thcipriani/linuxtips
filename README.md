@@ -200,6 +200,20 @@ Find process attached to shared memory segment
 
     lsof | grep [shmid from ipcs]
 
+Stop space splitting for file in bash:
+
+```shell
+#!/usr/bin/env bash
+SAVEIFS=$IFS
+IFS=$(echo -en "\n\b")
+
+for file in $(find . -name 'file'); do
+  ...
+done
+
+IFS=$SAVEIFS
+```
+
 Linux Fun Crap
 
 - Generate a list of your most used commands— 
