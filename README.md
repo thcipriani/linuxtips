@@ -214,6 +214,10 @@ done
 IFS=$SAVEIFS
 ```
 
+Allow traffic via ufw:
+
+    sudo ufw allow from [ip/any] to [host/any] port [any/port-num] proto [upd/tcp/whatevs]
+
 Linux Fun Crap
 
 - Generate a list of your most used commands— 
