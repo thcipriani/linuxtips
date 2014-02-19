@@ -223,6 +223,10 @@ Allow traffic via ufw:
 
     sudo ufw allow from [ip/any] to [host/any] port [any/port-num] proto [upd/tcp/whatevs]
 
+RCS Bulk Commit all files in directory
+
+    ci -l -t-'[file descriptor]' -m'[commit message]' *
+
 Linux Fun Crap
 
 - Generate a list of your most used commands— 
