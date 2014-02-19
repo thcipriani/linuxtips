@@ -222,6 +222,10 @@ RCS Bulk Commit all files in directory
 
     ci -l -t-'[file descriptor]' -m'[commit message]' *
 
+Edit last command with $EDITOR
+
+    fc
+
 Linux Fun Crap
 
 - Generate a list of your most used commands— 
