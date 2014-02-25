@@ -226,6 +226,34 @@ Edit last command with $EDITOR
 
     fc
 
+Check default runlevel for system:
+
+    grep ^id /etc/inittab
+
+List services/runlevels chkconfig:
+
+    chkconfig --list
+
+Add service to startup with chkconfig:
+
+    chkconfig --level 235 [service] on
+
+Remove service from startup with chkconfig:
+
+    chkconfig --del [service]
+
+List service runlevels without chkconfig:
+
+    ls -l /etc/rc*.d
+
+Add service to startup with update-rc.d:
+
+    update-rc.d [service] defaults
+
+Remove service from startup with update-rc.d:
+
+    update-rc.d -f [service] remove
+
 Linux Fun Crap
 
 - Generate a list of your most used commands— 
