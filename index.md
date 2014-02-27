@@ -87,57 +87,140 @@ Git show contents of stash
 
     git stash show -p stash@{1}
 
-IPTables
-
-- Block an IPAddress
+IPTables Block an IPAddress
 
     iptables -A INPUT -s "$BLOCK_THIS_IP" -j DROP
 
-- Insert a rule to allow inbound tcp traffic on port 8000 (puts the rule at the top)
+IPTables Insert a rule to allow inbound tcp traffic on port 8000 (puts the rule at the top)
 
     iptables -I INPUT -i eth0 -p tcp --dport 8000 -j ACCEPT
 
-Tar (Tape Archive Utility)
-
-- Create gzipped tar from file or directory
+Create gzipped tar from file or directory
 
     tar -cvzf tarfile.tar.gz directory file otherfile
 
-- Create bzipped tar file from file or directory
+Create bzipped tar file from file or directory
 
     tar -cvjf tarfile.tar.bz2 directory file otherfile
 
-- List contents of tar.gz file
+List contents of tar.gz file
 
     tar -tvzf tarfile.tar.gz
 
-Wget/cURL
-
-- Rip a whole site with wget:
+WGet rip a whole site
 
     wget --recursive --no-clobber --page-requisites --html-extension --convert-links --restrict-file-names=windows --domains <domain-name> --no-parent http://<domain>
 
-- Upload file via cURL
+Upload file via cURL
 
     curl -X 'POST' -H 'Accept: application/json' -F 'file_name=Test File' -F 'file_contents=@/path/to/file.type' www.example.com/file/add
 
-- Fill login form via cURL
+Fill login form via cURL
 
     curl -X 'POST' -F 'username=tyler' -F 'password=pass123' www.example.com/login
 
-MySQL
+MySQL Find Users
 
-- Single DB Dump
+    SELECT * FROM mysql.user WHERE User like '%whatever%'\G
 
-    mysqldump --compress -h localhost --quick --single-transaction [db_name] > [dumpfile]
+MySQL Add User to db
 
-- Nice DB Dump
+    GRANT USAGE ON *.* TO '<user>'@'%' IDENTIFIED BY '<password>';
 
-    mysqldump -h localhost -u [username] -p --add-drop-database --skip-comments --routines --compress --quick --single-transaction --databases [db_name] > [dumpfile]
+MySQL Give User Access
 
-- Dump tables that match pattern:
+    GRANT SELECT, INSERT, UPDATE, DELETE, EXECUTE ON <database>.* TO '<user>'@'%'
+
+MySQL Delete User
+
+    DROP USER '<user>'@'%';
+    FLUSH PRIVILEGES;
+
+MySQL Find User Privileges
+
+    SHOW GRANTS for '<username>';
+    -- or
+    SHOW GRANTS FOR CURRENT_USER;
+
+MySQL Revoke User Privileges
+
+    REVOKE INSERT ON *.* FROM '<username>'@'%';
+
+MySQL Rename User
+
+    RENAME USER 'jeffrey'@'localhost' TO 'jeff'@'127.0.0.1';
+
+MySQL Set Password
+
+    SET PASSWORD FOR 'bob'@'%.example.org' = PASSWORD('cleartext password');
+
+MySQL Update User Password
+
+    UPDATE mysql.user SET Password=PASSWORD('cleartext password')  WHERE User='bob' AND Host='%.example.org';
+    FLUSH PRIVILEGES;
+
+MySQLDump a Single database
+
+    mysqldump --compress -h localhost -u [username] -p --quick --single-transaction [db_name] > [dumpfile]
+
+MySQLDump databases
+
+    -- NOTE TO USE --add-drop-database YOU MUST USE --databases
+    mysqldump -h localhost -u [username] -p --add-drop-database --skip-comments --routines --compress --quick --single-transaction --databases [db_name] > [dumpfile]
+
+MySQLDump all DBs like [pattern]
 
     mysqldump -h localhost --quick --single-transaction [db_name] `mysql -ND [db_name] -h localhost -e "show tables like '[pattern]'" | awk '{ printf $1" " }'` > dumpfile.sql
+
+MySQL Add index:
+
+    ALTER TABLE `table` ADD INDEX `column_name` (`column_name`)
+    ALTER TABLE `account_agreement_pricebook` ADD INDEX `pricebook_id` (`pricebook_id`);
+
+MySQL Show indexes:
+
+    SHOW INDEX FROM `table`;
+
+MySQL Show available engines
+
+    mysql> show engines\G
+
+MySQL Enable engine
+
+    INSTALL PLUGIN [engine] SONAME 'ha_[engine].so';
+
+The following plugins are installed into the OS but not into MySQL:
+
+    ha_archive.so - archive
+    ha_blackhole.so - blackhole
+    ha_example.so - example
+    ha_innodb_plugin.so - InnoDB Plugin
+
+MySQL Replication things to know:
+
+* REPLICATION SETUP: http://plusbryan.com/mysql-replication-without-downtime
+* Trust Replication
+* Monitor Seconds_Behind_Master
+* Monitor Exec_Master_Log_Pos
+* Run SHOW PROCESSLIST;—take note of the SQL thread to see if it is processing long running queries.
+* Keep an eye on master_db_host:/var/log/mysql/slow.log—this is a log of the longest-running mysql queries—try to optimize 'em
+* SHOW PROCESSLIST; (or SHOW FULL PROCESSLIST;) on the Slave:
+  * there should be two DB Connections whose user name is `system user`
+  * One of those DB Connections will have the current SQL statement being processed by replication.
+  * As long as a different SQL statement is visible each time you run SHOW PROCESSLIST;, you can trust mysql is still replicating properly.
+
+MySQL Replication Last_Error:  Duplicate Key Entry
+
+    stop slave; set global mysql_slave_skip_counter = 1; start slave; -- repeat :)
+
+Is MySQL Slave Processing Relay Logs?
+
+    STOP SLAVE IO_THREAD;
+    SHOW SLAVE STATUS\G
+    -- check Exec_Master_Log_Pos --
+    SHOW SLAVE STATUS\G
+    -- if it doesn't move—it's working—run: --
+    START SLAVE IO_THREAD;
 
 Debug bash scripts, add:
 
