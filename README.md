@@ -337,6 +337,10 @@ Remove service from startup with update-rc.d:
 
     update-rc.d -f [service] remove
 
+NPM ingore SSL problems
+
+    npm config set strict-ssl false
+
 Linux Fun Crap
 
 - Generate a list of your most used commands— 
