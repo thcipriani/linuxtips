@@ -222,6 +222,53 @@ Is MySQL Slave Processing Relay Logs?
     -- if it doesn't move—it's working—run: --
     START SLAVE IO_THREAD;
 
+PostgreSQL show user defined types
+
+    SELECT n.nspname AS schema,
+        pg_catalog.format_type ( t.oid, NULL ) AS name,
+        t.typname AS internal_name,
+        CASE
+            WHEN t.typrelid != 0
+            THEN CAST ( 'tuple' AS pg_catalog.text )
+            WHEN t.typlen < 0
+            THEN CAST ( 'var' AS pg_catalog.text )
+            ELSE CAST ( t.typlen AS pg_catalog.text )
+        END AS size,
+        pg_catalog.array_to_string (
+            ARRAY( SELECT e.enumlabel
+                    FROM pg_catalog.pg_enum e
+                    WHERE e.enumtypid = t.oid
+                    ORDER BY e.oid ), E'\n'
+            ) AS elements,
+        pg_catalog.obj_description ( t.oid, 'pg_type' ) AS description
+    FROM pg_catalog.pg_type t
+    LEFT JOIN pg_catalog.pg_namespace n
+        ON n.oid = t.typnamespace
+    WHERE ( t.typrelid = 0
+            OR ( SELECT c.relkind = 'c'
+                    FROM pg_catalog.pg_class c
+                    WHERE c.oid = t.typrelid
+                )
+        )
+        AND NOT EXISTS
+            ( SELECT 1
+                FROM pg_catalog.pg_type el
+                WHERE el.oid = t.typelem
+                    AND el.typarray = t.oid
+            )
+        AND n.nspname <> 'pg_catalog'
+        AND n.nspname <> 'information_schema'
+        AND pg_catalog.pg_type_is_visible ( t.oid )
+    ORDER BY 1, 2;
+
+PostgreSQL show queries the generate `\d...` commands
+
+    \set ECHO_HIDDEN
+
+PostgreSQL equivalent of MySQL's `\G'
+
+    <query>\x\g\x
+
 Debug bash scripts, add:
 
     set -x
@@ -238,10 +285,10 @@ List currently established, closed, orphaned and waiting TCP sockets:
 
 `netstat -tlnp` vs `ss -ln`
 
-    $ time netstat -tlnp                                                                                                   127 ↵
+    $ time netstat -tlnp
     netstat -tlnp  0.00s user 0.02s system 97% cpu 0.016 total
 
-    $ time ss -ln       
+    $ time ss -ln
     ss -ln  0.00s user 0.00s system 83% cpu 0.005 total
 
 Check disk I/O:
@@ -341,6 +388,10 @@ Add service to startup with update-rc.d:
 Remove service from startup with update-rc.d:
 
     update-rc.d -f [service] remove
+
+NPM ingore SSL problems
+
+    npm config set strict-ssl false
 
 Linux Fun Crap
 
