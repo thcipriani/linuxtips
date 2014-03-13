@@ -2,25 +2,21 @@
 
 This is a list of things I either think are neat, or things I'm always Googling.
 
-Locale Settings:
+Locale Settings [locale(7)]:
 
     export LANGUAGE=en_US.UTF-8
     export LANG=en_US.UTF-8
     export LC_ALL=en_US.UTF-8
 
-Process Tree:
+Process Tree [pstree(1)]:
 
     pstree -p
 
-Create a `.gitkeep` file in all empty directories:
-
-    find . -type d -empty -print0 | xargs -0 -I{} touch {}/.gitkeep
-
-Remove all files in /tmp older than 2 days
+Remove all files in /tmp older than 2 days [find(1) EXPRESSIONS]
 
     find /tmp -maxdepth 1 -type f -mtime +2 -exec rm -i "{}" \;
 
-Shell Startup Files:
+Shell Startup Files [bash(1)/zsh(1) INVOCATION]:
 
 - Linux/Bash/TTY:<br>
   `/etc/profile` &rarr; first of `~/.bash_profile`, `~/.bash_login`, `~/.profile` that exists
@@ -52,7 +48,7 @@ Shell Startup Files:
 - OSX/ZShell/Scripts (/usr/bin/env zsh):<br>
   `/etc/zshenv`
 
-Setting your hostname&#8212;Debian and Ubuntu:
+Setting your hostname&#8212;Debian and Ubuntu [hostname(1)/hosts(5)]:
 
 1. Edit `/etc/hostname` and add you FQDN, e.g., `echo "parabola.tylercipriani.com" > /etc/hostname` 
 2. Run `hostname -F /etc/hostname` to update your hostname
@@ -60,7 +56,7 @@ Setting your hostname&#8212;Debian and Ubuntu:
 
     127.0.1.1 parabola.tylercipriani.com parabola localhost
 
-Cronjob Time Syntax:
+Cronjob Time Syntax [crontab(5)]:
 
 - m h dom m dow <what_to_do>
   - m - minute(0–59)
@@ -70,47 +66,67 @@ Cronjob Time Syntax:
   - dow - day-of-week(0–6)
   - <what_to_do> - anycommand
 
-Send mail
+Send mail [mail(1)]
 
     echo "Message Body" | mail -s "Mail Subject" user@example.com
 
-Send mail to multiple people:
+Send mail to multiple people [mail(1)]:
 
     echo "Message Body" | mail -s "Mail Subject" -c "user2@example.com user3@example.com" user@example.com
 
-Git show contents of stash
+Create a `.gitkeep` file in all empty directories [find(1)]:
+
+    find . -type d -empty -print0 | xargs -0 -I{} touch {}/.gitkeep
+
+Git stash unstaged commits [git-stash(1)]
+
+    git stash
+
+Git show stash (just changed files) at reference 0 [git-show(1)]
+
+    git show stash stash@{0}
+
+Git show contents of stash at stash ref 1 [git-stash(1)]
 
     git stash show -p stash@{1}
 
-IPTables Block an IPAddress
+Git list all stashes [git-stash(1)]
+
+    git stash list
+
+Git list repo contribution authors, order by # of commits [git-shortlog(1)]
+
+    git shortlog -sn
+
+IPTables Block an IPAddress [iptables(8) OPTIONS]
 
     iptables -A INPUT -s "$BLOCK_THIS_IP" -j DROP
 
-IPTables Insert a rule to allow inbound tcp traffic on port 8000 (puts the rule at the top)
+IPTables Insert a rule to allow inbound tcp traffic on port 8000 (puts the rule at the top)[iptables(8) OPTIONS]
 
     iptables -I INPUT -i eth0 -p tcp --dport 8000 -j ACCEPT
 
-Create gzipped tar from file or directory
+Create gzipped tar from file or directory [tar(1)]
 
     tar -cvzf tarfile.tar.gz directory file otherfile
 
-Create bzipped tar file from file or directory
+Create bzipped tar file from file or directory [tar(1) OTHER OPTIONS]
 
     tar -cvjf tarfile.tar.bz2 directory file otherfile
 
-List contents of tar.gz file
+List contents of tar.gz file [tar(1)]
 
     tar -tvzf tarfile.tar.gz
 
-WGet rip a whole site
+WGet rip a whole site [wget(1)]
 
     wget --recursive --no-clobber --page-requisites --html-extension --convert-links --restrict-file-names=windows --domains <domain-name> --no-parent http://<domain>
 
-Upload file via cURL
+Upload file via cURL [curl(1)]
 
     curl -X 'POST' -H 'Accept: application/json' -F 'file_name=Test File' -F 'file_contents=@/path/to/file.type' www.example.com/file/add
 
-Fill login form via cURL
+Fill login form via cURL [curl(1)]
 
     curl -X 'POST' -F 'username=tyler' -F 'password=pass123' www.example.com/login
 
