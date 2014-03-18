@@ -16,6 +16,22 @@ Remove all files in /tmp older than 2 days [find(1) EXPRESSIONS]
 
     find /tmp -maxdepth 1 -type f -mtime +2 -exec rm -i "{}" \;
 
+Bash Special Variables [bash(1) PARAMETERS, Special Parameters]:
+
+- `$*`<br>Expands to the positional parameters, starting from one. Quoted expands to words sparated by 1st char of `$IFS`
+- `$@`<br>`$*` except expands to words separated by space when quoted
+- `$#`<br> Number of positional params in decimal
+- `$?`<br>Exit status of most recent foreground pipeline
+- `$-`<br>Option flags set by the `set` builtin command
+- `$$`<br>PID of current shell
+- `$!`<br>PID of most recent async/bg command
+- `$0`<br>Name of shell or script
+- `$_`<br>The underscore variable is set at shell startup and contains the absolute file name of the shell or script being executed as passed in the argument list. Subsequently, it expands to the last argument to the previous command, after expansion.
+
+Bash test a socket exists [bash(1) CONDITIONAL EXPRESSIONS]
+
+  test -S [socketname] && echo 'true'
+
 Shell Startup Files [bash(1)/zsh(1) INVOCATION]:
 
 - Linux/Bash/TTY:<br>
@@ -97,6 +113,10 @@ Git list all stashes [git-stash(1)]
 Git list repo contribution authors, order by # of commits [git-shortlog(1)]
 
     git shortlog -sn
+
+Git create patch file from the last commit[git-format-patch(1)]
+
+    git format-patch HEAD~ --stdout > file.patch
 
 IPTables Block an IPAddress [iptables(8) OPTIONS]
 
