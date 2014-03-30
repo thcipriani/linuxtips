@@ -1,5 +1,4 @@
 INDEX = ${CURDIR}/index.md
-PERLCMD = 
 
 .PHONY: create
 
