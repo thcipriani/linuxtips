@@ -118,6 +118,10 @@ Git create patch file from the last commit[git-format-patch(1)]
 
     git format-patch HEAD~ --stdout > file.patch
 
+Git check ignored patter matched [git-check-ignore(1) v.1.8.5+)
+
+    git check-ignore [path]
+
 IPTables Block an IPAddress [iptables(8) OPTIONS]
 
     iptables -A INPUT -s "$BLOCK_THIS_IP" -j DROP
