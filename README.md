@@ -118,6 +118,18 @@ Git create patch file from the last commit[git-format-patch(1)]
 
     git format-patch HEAD~ --stdout > file.patch
 
+Git show history and diff of a file [git-log(1)]
+
+    git log -p -- <path/to/file>
+
+Git search for deleted file [git-log(1)]
+
+    # Search for file path
+    git log --diff-filter=D | grep <deleted file name>
+
+    # Find the delete commit id
+    git log --all -- <deleted/file/path>
+
 IPTables Block an IPAddress [iptables(8) OPTIONS]
 
     iptables -A INPUT -s "$BLOCK_THIS_IP" -j DROP
