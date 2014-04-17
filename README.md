@@ -130,6 +130,10 @@ Git search for deleted file [git-log(1)]
     # Find the delete commit id
     git log --all -- <deleted/file/path>
 
+Git check ignored patter matched [git-check-ignore(1) v.1.8.5+)
+
+    git check-ignore [path]
+
 IPTables Block an IPAddress [iptables(8) OPTIONS]
 
     iptables -A INPUT -s "$BLOCK_THIS_IP" -j DROP
