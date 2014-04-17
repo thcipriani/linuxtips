@@ -123,6 +123,18 @@ Git create patch file from the last commit[git-format-patch(1)]
 
     git format-patch HEAD~ --stdout > file.patch
 
+Git show history and diff of a file [git-log(1)]
+
+    git log -p -- <path/to/file>
+
+Git search for deleted file [git-log(1)]
+
+    # Search for file path
+    git log --diff-filter=D | grep <deleted file name>
+
+    # Find the delete commit id
+    git log --all -- <deleted/file/path>
+
 Git check ignored patter matched [git-check-ignore(1) v.1.8.5+)
 
     git check-ignore [path]
