@@ -77,6 +77,10 @@ Setting your hostname&#8212;Debian and Ubuntu [hostname(1)/hosts(5)]:
 
     127.0.1.1 parabola.tylercipriani.com parabola localhost
 
+Get the permission octal and file name for all files in a directory [stat(1)]:
+
+    stat -c "%a %n" *
+
 Cronjob Time Syntax [crontab(5)]:
 
 - m h dom m dow <what_to_do>
