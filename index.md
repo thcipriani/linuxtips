@@ -125,7 +125,19 @@ Git list repo contribution authors, order by # of commits [git-shortlog(1)]
 
 Git create patch file from the last commit[git-format-patch(1)]
 
-    git format-patch HEAD~ --stdout > file.patch
+    git format-patch HEAD~ --stdout > <file.patch>
+
+Git check what's in a patch file [git-apply(1)]
+
+    git apply --stat <file.patch>
+
+Git test patch file before applying to repo [git-apply(1)]
+
+    git apply --check <file.patch>
+
+Git apply patch file [git-apply(1)]
+
+    git apply <file.patch>
 
 Git show history and diff of a file [git-log(1)]
 
