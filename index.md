@@ -81,6 +81,10 @@ Get the permission octal and file name for all files in a directory [stat(1)]:
 
     stat -c "%a %n" *
 
+Show linked library dependencies of a binary [ldd(1)]
+
+    ldd $(command -v <binary>)
+
 Cronjob Time Syntax [crontab(5)]:
 
 - m h dom m dow <what_to_do>
