@@ -103,6 +103,14 @@ Send mail to multiple people [mail(1)]:
 
     echo "Message Body" | mail -s "Mail Subject" -c "user2@example.com user3@example.com" user@example.com
 
+Dpkg info about the maintainer of a debian/ubuntu package:
+
+    dpkg-query -W -f='${Maintainer}' coreutils
+
+Find your os version information ([superuser.com](https://superuser.com/questions/11008/how-do-i-find-out-what-version-of-linux-im-running))
+
+    cat /etc/*release
+
 Create a `.gitkeep` file in all empty directories [find(1)]:
 
     find . -type d -empty -print0 | xargs -0 -I{} touch {}/.gitkeep
@@ -341,9 +349,21 @@ PostgreSQL equivalent of MySQL's `\G'
 
     <query>\x\g\x
 
+PHP Find PHP CLI extension directory:
+
+    php -i | grep 'extension_dir'
+
+PHP find pecl config extension directory:
+
+    pecl config-show | grep 'ext_dir'
+
 Debug bash scripts, add:
 
     set -x
+
+Bundler show gems with path
+
+    bundle list --paths
 
 Forward new port in existing SSH session:
 
