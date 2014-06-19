@@ -81,6 +81,20 @@ Get the permission octal and file name for all files in a directory [stat(1)]:
 
     stat -c "%a %n" *
 
+POSIX RegEx Patterns [grep(1)]:
+
+    [:alnum:] - [a-zA-Z0-9]
+    [:alpha:] - [a-z]
+    [:cntrl:] - [\x00-\x1F\x7F]
+    [:digit:] - [0-9]
+    [:graph:] - Any visible chars except spaces & control [\x21-\x7E]
+    [:lower:] - [a-z]
+    [:print:] - Any visible except control [\x21-\x7E]
+    [:punct:] - [!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]
+    [:space:] - [ \t\r\n\v\f]
+    [:upper:] - [A-Z]
+    [:xdigit:] - Hexadecimal digits [A-Fa-f0-9]
+
 Show linked library dependencies of a binary [ldd(1)]
 
     ldd $(command -v <binary>)
