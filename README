@@ -14,7 +14,6 @@ alias cp='cp -i'
 alias mv='mv -i'
 
 alias sosh=". \"${HOME}/.$(basename $SHELL)rc\""
-alias sosh=". ~/.$(basename $SHELL)rc"
 function digga() { dig +nocmd "$1" any +multiline +noall +answer }
 cp_p () { rsync -WavP --human-readable --progress $1 $2 } # Copy w/ progress
 _haz() { command -v "$1" > /dev/null 2>&1 } # Has command in path
@@ -544,24 +543,24 @@ DUMB
 
     history | sed "s/^[0-9 ]*//" | sed "s/ *| */\n/g" | awk '{print $1}' | sort | uniq -c | sort -rn | head -n 100 > commands.txt
 
-- The Useless Use of `cat` Award ([partmaps](http://partmaps.org/era/unix/award.html#cat))
-- Terminal Keynote (Ruby) ([github](https://github.com/fxn/tkn))
-- Boom. Motherfucking Text Snippets on the command line ([zachhholman](http://zachholman.com/boom/))
-- Spark sparklines for your shell ([zachholman](http://zachholman.com/spark/))
-- Lolcat ([github](https://github.com/busyloop/lolcat))
-- cowsay ([github](https://github.com/schacon/cowsay))
-- Ponysay ([github](https://github.com/erkin/ponysay))
-- FIGlet ([figlet](http://www.figlet.org/))
-- Libcaca ([caca.zoy](http://caca.zoy.org/wiki/libcaca))
-- Toilet ([caca.zoy](http://caca.zoy.org/wiki/toilet))
-- Boxes ([thomasjensen](http://boxes.thomasjensen.com/))
-- Cadubi (perl) ([langworth](http://langworth.com/pub/cadubi/))
-- img2txt ([hit9](http://hit9.org/img2txt/))
-- Nyancat ([klange.github](https://github.com/klange/nyancat))
-- CMatrix ([asty](http://www.asty.org/cmatrix/))
-- janbrennen rice ([github](https://github.com/janbrennen/rice))
-- dotshare.it ([dotshare.it](http://dotshare.it))
-- linux logo ([freecode](http://freecode.com/projects/linuxlogo))
-- bb ([aa-project](http://aa-project.sourceforge.net/bb/))
-- Powerline Font symbols ([powerline](https://powerline.readthedocs.org/en/latest/fontpatching.html))
-- Stupid Programmer Tricks/Starwars gifs ([rarlindseysmash](http://rarlindseysmash.com/posts/stupid-programmer-tricks-and-star-wars-gifs))
+- The Useless Use of `cat` Award - http://partmaps.org/era/unix/award.html#cat
+- Terminal Keynote (Ruby) - https://github.com/fxn/tkn
+- Boom. Motherfucking Text Snippets on the command line - http://zachholman.com/boom/
+- Spark sparklines for your shell - http://zachholman.com/spark/
+- Lolcat - https://github.com/busyloop/lolcat
+- cowsay - https://github.com/schacon/cowsay
+- Ponysay - https://github.com/erkin/ponysay
+- FIGlet - http://www.figlet.org/
+- Libcaca - http://caca.zoy.org/wiki/libcaca
+- Toilet - http://caca.zoy.org/wiki/toilet
+- Boxes - http://boxes.thomasjensen.com/
+- Cadubi - http://langworth.com/pub/cadubi/
+- img2txt - http://hit9.org/img2txt/
+- Nyancat - https://github.com/klange/nyancat
+- CMatrix - http://www.asty.org/cmatrix/
+- janbrennen rice - https://github.com/janbrennen/rice
+- dotshare.it - http://dotshare.it
+- linux logo - http://freecode.com/projects/linuxlogo
+- bb - http://aa-project.sourceforge.net/bb/
+- Powerline Font symbols - https://powerline.readthedocs.org/en/latest/fontpatching.html
+- Stupid Programmer Tricks/Starwars gifs - http://rarlindseysmash.com/posts/stupid-programmer-tricks-and-star-wars-gifs
