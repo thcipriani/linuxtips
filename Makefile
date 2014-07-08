@@ -1,2 +1,2 @@
-index.html:
-	@ git show origin/master:README > index.html
+index.txt:
+	@ git show origin/master:README > index.txt
