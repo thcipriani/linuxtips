@@ -1,7 +1,41 @@
-# Linux Notes
+Linux Notes
+===
 
-This is a list of things I either think are neat, or things I'm always Googling.
+HELPFUL COMMANDS
+---
+alias l="ls -AlFh"
+alias la="ls -Al"
+alias lh="ls -Alh"
+alias ll="ls -l"
 
+# I'm dumb
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+alias sosh=". \"${HOME}/.$(basename $SHELL)rc\""
+alias sosh=". ~/.$(basename $SHELL)rc"
+function digga() { dig +nocmd "$1" any +multiline +noall +answer }
+cp_p () { rsync -WavP --human-readable --progress $1 $2 } # Copy w/ progress
+_haz() { command -v "$1" > /dev/null 2>&1 } # Has command in path
+alias extip="dig +short myip.opendns.com @resolver1.opendns.com" # Fastest external IP
+alias 'hist?'="history | grep -i"
+function psgrep() { ps axuf | grep -v grep | grep "$@" -i --color=auto; }
+function fname() { find . -iname "*$@*"; }
+function take() { mkdir $1 && cd $1 }
+
+alias tls="tmux list-sessions"
+alias ta="tmux attach-session -t"
+alias td="tmux kill-session -t"
+
+# Colored up cat!
+# Easy Insall & Pygments: sudo apt-get install python-pip && sudo pip install Pygments
+alias c='pygmentize -O style=monokai -f console256 -g'
+
+
+
+MAN PAGE INFO I NEVER REMEMBER
+---
 Locale Settings [locale(7)]:
 
     export LANGUAGE=en_US.UTF-8
@@ -18,15 +52,15 @@ Remove all files in /tmp older than 2 days [find(1) EXPRESSIONS]
 
 Bash Special Variables [bash(1) PARAMETERS, Special Parameters]:
 
-- `$*`<br>Expands to the positional parameters, starting from one. Quoted expands to words sparated by 1st char of `$IFS`
-- `$@`<br>`$*` except expands to words separated by space when quoted
-- `$#`<br> Number of positional params in decimal
-- `$?`<br>Exit status of most recent foreground pipeline
-- `$-`<br>Option flags set by the `set` builtin command
-- `$$`<br>PID of current shell
-- `$!`<br>PID of most recent async/bg command
-- `$0`<br>Name of shell or script
-- `$_`<br>The underscore variable is set at shell startup and contains the absolute file name of the shell or script being executed as passed in the argument list. Subsequently, it expands to the last argument to the previous command, after expansion.
+- `$*`Expands to the positional parameters, starting from one. Quoted expands to words sparated by 1st char of `$IFS`
+- `$@``$*` except expands to words separated by space when quoted
+- `$#` Number of positional params in decimal
+- `$?`Exit status of most recent foreground pipeline
+- `$-`Option flags set by the `set` builtin command
+- `$$`PID of current shell
+- `$!`PID of most recent async/bg command
+- `$0`Name of shell or script
+- `$_`The underscore variable is set at shell startup and contains the absolute file name of the shell or script being executed as passed in the argument list. Subsequently, it expands to the last argument to the previous command, after expansion.
 
 Bash test a socket exists [bash(1) CONDITIONAL EXPRESSIONS]
 
@@ -34,47 +68,43 @@ Bash test a socket exists [bash(1) CONDITIONAL EXPRESSIONS]
 
 Shell Startup Files [bash(1)/zsh(1) INVOCATION]:
 
-- Linux/Bash/TTY:<br>
-  `/etc/profile` &rarr; first of `~/.bash_profile`, `~/.bash_login`, `~/.profile` that exists
+- Linux/Bash/TTY:
+  `/etc/profile` → first of `~/.bash_profile`, `~/.bash_login`, `~/.profile` that exists
 
-- Linux/Bash/XTerm:<br>
-  `/etc/bash.bashrc` &rarr; `.bashrc`
+- Linux/Bash/XTerm:
+  `/etc/bash.bashrc` → `.bashrc`
 
-- Linux/Bash/Scripts (#!/usr/bin/env bash):<br>
+- Linux/Bash/Scripts (#!/usr/bin/env bash):
   looks for `$BASH_ENV` var and sources the expansion of that variable
 
-- Linux/ZShell/TTY:<br>
-  `/etc/zshenv` &rarr; `~/.zshenv` &rarr; `/etc/zprofile` &rarr; `~/.zprofile` &rarr; `/etc/zshrc` &rarr; `~/.zshrc` &rarr; `/etc/zlogin` &rarr; `~/.zslogin` (`/etc/z*` is the default; however `/etc/zsh/z*` seems to be common (at least on Ubuntu))
+- Linux/ZShell/TTY:
+  `/etc/zshenv` → `~/.zshenv` → `/etc/zprofile` → `~/.zprofile` → `/etc/zshrc` → `~/.zshrc` → `/etc/zlogin` → `~/.zslogin` (`/etc/z*` is the default; however `/etc/zsh/z*` seems to be common (at least on Ubuntu))
 
-- Linux/ZShell/XTerm:<br>
-  `/etc/zshrc` &rarr; `~/.zshrc`
+- Linux/ZShell/XTerm:
+  `/etc/zshrc` → `~/.zshrc`
 
-- Linux/ZShell/Scripts (#!/usr/bin/env zsh):<br>
+- Linux/ZShell/Scripts (#!/usr/bin/env zsh):
   `/etc/zshenv`
 
-- OSX/Bash/TTY/XTerm:<br>
-  `/etc/profile` &rarr; first of `~/.bash_profile`, `~/.bash_login`, `~/.profile` that exists
+- OSX/Bash/TTY/XTerm:
+  `/etc/profile` → first of `~/.bash_profile`, `~/.bash_login`, `~/.profile` that exists
 
-- OSX/Bash/Scripts (/usr/bin/env bash):<br>
+- OSX/Bash/Scripts (/usr/bin/env bash):
   looks for `$BASH_ENV` var and sources the expansion of that variable
 
-- OSX/ZShell/TTY/XTerm:<br>
-  `/etc/zshenv` &rarr; `~/.zshenv` &rarr; `/etc/zprofile` &rarr; `~/.zprofile` &rarr; `/etc/zshrc` &rarr; `~/.zshrc` &rarr; `/etc/zlogin` &rarr; `~/.zslogin`
+- OSX/ZShell/TTY/XTerm:
+  `/etc/zshenv` → `~/.zshenv` → `/etc/zprofile` → `~/.zprofile` → `/etc/zshrc` → `~/.zshrc` → `/etc/zlogin` → `~/.zslogin`
 
-- OSX/ZShell/Scripts (/usr/bin/env zsh):<br>
+- OSX/ZShell/Scripts (/usr/bin/env zsh):
   `/etc/zshenv`
 
-Setting your hostname&#8212;Debian and Ubuntu [hostname(1)/hosts(5)]:
+Setting your hostname—Debian and Ubuntu [hostname(1)/hosts(5)]:
 
-1. Edit `/etc/hostname` and add you FQDN, e.g., `echo "parabola.tylercipriani.com" > /etc/hostname` 
-2. Run `hostname -F /etc/hostname` to update your hostname
-3. Edit `/etc/hosts`:
+  1. Edit `/etc/hostname` and add you FQDN, e.g., `echo "parabola.tylercipriani.com" > /etc/hostname`
+  2. Run `hostname -F /etc/hostname` to update your hostname
+  3. Edit `/etc/hosts`:
 
     127.0.1.1 parabola.tylercipriani.com parabola localhost
-
-Get the permission octal and file name for all files in a directory [stat(1)]:
-
-    stat -c "%a %n" *
 
 POSIX RegEx Patterns [grep(1)]:
 
@@ -104,25 +134,180 @@ Cronjob Time Syntax [crontab(5)]:
   - dow - day-of-week(0–6)
   - <what_to_do> - anycommand
 
-Send mail [mail(1)]
+Send mail [mail(1)]:
 
-    echo "Message Body" | mail -s "Mail Subject" user@example.com
+   echo "Message Body" | mail -s "Mail Subject" user@example.com
 
 Send mail to multiple people [mail(1)]:
 
     echo "Message Body" | mail -s "Mail Subject" -c "user2@example.com user3@example.com" user@example.com
 
-Dpkg info about the maintainer of a debian/ubuntu package:
+Send mail with attachement [mutt(1)]:
+
+    echo "Message Body" | mutt -a /path/to/attachment -s "Subject" -- user@example.com
+
+Dpkg info about the maintainer of a Debian/Ubuntu package:
 
     dpkg-query -W -f='${Maintainer}' coreutils
 
-Find your os version information ([superuser.com](https://superuser.com/questions/11008/how-do-i-find-out-what-version-of-linux-im-running))
+Find your os version information (https://superuser.com/questions/11008/how-do-i-find-out-what-version-of-linux-im-running)
 
     cat /etc/*release
 
 Create a `.gitkeep` file in all empty directories [find(1)]:
 
     find . -type d -empty -print0 | xargs -0 -I{} touch {}/.gitkeep
+
+IPTables Block an IPAddress [iptables(8) OPTIONS]
+
+    iptables -A INPUT -s "$BLOCK_THIS_IP" -j DROP
+
+IPTables Insert a rule to allow inbound tcp traffic on port 8000 (puts the rule at the top)[iptables(8) OPTIONS]
+
+    iptables -I INPUT -i eth0 -p tcp --dport 8000 -j ACCEPT
+
+Create gzipped tar from file or directory [tar(1)]
+
+    tar -cvzf tarfile.tar.gz directory file otherfile
+
+Create bzipped tar file from file or directory [tar(1) OTHER OPTIONS]
+
+    tar -cvjf tarfile.tar.bz2 directory file otherfile
+
+List contents of tar.gz file [tar(1)]
+
+    tar -tvzf tarfile.tar.gz
+
+WGet rip a whole site [wget(1)]
+
+    wget --recursive --no-clobber --page-requisites --html-extension --convert-links --restrict-file-names=windows --domains <domain-name> --no-parent http://<domain>
+
+Upload file via cURL [curl(1)]
+
+    curl -X 'POST' -H 'Accept: application/json' -F 'file_name=Test File' -F 'file_contents=@/path/to/file.type' www.example.com/file/add
+
+Fill login form via cURL [curl(1)]
+
+    curl -X 'POST' -F 'username=tyler' -F 'password=pass123' www.example.com/login
+
+Forward new port in existing SSH session:
+
+    <newline>
+    ~C
+    ssh> ?
+
+List currently established, closed, orphaned and waiting TCP sockets:
+
+    ss -s
+
+`netstat -tlnp` vs `ss -ln`
+
+    $ time netstat -tlnp
+    netstat -tlnp  0.00s user 0.02s system 97% cpu 0.016 total
+
+    $ time ss -ln
+    ss -ln  0.00s user 0.00s system 83% cpu 0.005 total
+
+Check disk I/O:
+
+    vmstat 1 10
+
+What's using disk I/O:
+
+    dstat --top-io --top-bio
+
+Show io per-device (needs sysstat package on debian):
+
+    iostat -sk 2
+
+Download missing depedencies automatically on Debian/Ubuntu [apt-get(8)]:
+
+    sudo apt-get --fix-broken install
+
+Search for packages names not descriptions [apt-get(8)]:
+
+    sudo apt-get --names-only install
+
+Insert text at beginning of file without sed:
+
+    cat [file] | perl -pe 'BEGIN { print "[text]\n" }' > [outputfile]
+
+Insert text without abusing cat in perl (with backup file):
+
+    perl -i.bak -pe 'print "[text]\n" if $. == 1;' [file]
+
+Insert text at the end of the file with perl (with backup file):
+
+    perl -i.bak -ne 'print $_; print "[text]\n" if eof;' [file]
+
+Show compile flags for Nginx:
+
+    nginx -V 2>&1 | tr -- - '\n' | grep _module
+
+Linux print:
+
+    lp -h [cups_server]:[cups_port:-631] -d [destination_printer_name] -o [print_job_options] [filename]
+
+Check Shared Memory Segments:
+
+    ipcs -m
+
+Find process attached to shared memory segment
+
+    lsof | grep [shmid from ipcs]
+
+Bash reset IFS (http://redsymbol.net/articles/unofficial-bash-strict-mode/)
+
+    IFS=$'\n\t'
+
+Debug bash scripts, add:
+
+    set -x
+
+Allow traffic via ufw:
+
+    sudo ufw allow from [ip/any] to [host/any] port [any/port-num] proto [upd/tcp/whatevs]
+
+RCS Bulk Commit all files in directory
+
+    ci -l -t-'[file descriptor]' -m'[commit message]' *
+
+Edit last command with $EDITOR
+
+    fc
+
+Check default runlevel for system:
+
+    grep ^id /etc/inittab
+
+List services/runlevels chkconfig:
+
+    chkconfig --list
+
+Add service to startup with chkconfig:
+
+    chkconfig --level 235 [service] on
+
+Remove service from startup with chkconfig:
+
+    chkconfig --del [service]
+
+List service runlevels without chkconfig:
+
+    ls -l /etc/rc*.d
+
+Add service to startup with update-rc.d:
+
+    update-rc.d [service] defaults
+
+Remove service from startup with update-rc.d:
+
+    update-rc.d -f [service] remove
+
+
+
+GIT
+---
 
 Git stash unstaged commits [git-stash(1)]
 
@@ -176,37 +361,9 @@ Git check ignored patter matched [git-check-ignore(1) v.1.8.5+)
 
     git check-ignore [path]
 
-IPTables Block an IPAddress [iptables(8) OPTIONS]
 
-    iptables -A INPUT -s "$BLOCK_THIS_IP" -j DROP
-
-IPTables Insert a rule to allow inbound tcp traffic on port 8000 (puts the rule at the top)[iptables(8) OPTIONS]
-
-    iptables -I INPUT -i eth0 -p tcp --dport 8000 -j ACCEPT
-
-Create gzipped tar from file or directory [tar(1)]
-
-    tar -cvzf tarfile.tar.gz directory file otherfile
-
-Create bzipped tar file from file or directory [tar(1) OTHER OPTIONS]
-
-    tar -cvjf tarfile.tar.bz2 directory file otherfile
-
-List contents of tar.gz file [tar(1)]
-
-    tar -tvzf tarfile.tar.gz
-
-WGet rip a whole site [wget(1)]
-
-    wget --recursive --no-clobber --page-requisites --html-extension --convert-links --restrict-file-names=windows --domains <domain-name> --no-parent http://<domain>
-
-Upload file via cURL [curl(1)]
-
-    curl -X 'POST' -H 'Accept: application/json' -F 'file_name=Test File' -F 'file_contents=@/path/to/file.type' www.example.com/file/add
-
-Fill login form via cURL [curl(1)]
-
-    curl -X 'POST' -F 'username=tyler' -F 'password=pass123' www.example.com/login
+MySQL
+---
 
 MySQL Find Users
 
@@ -288,7 +445,6 @@ The following plugins are installed into the OS but not into MySQL:
 MySQL Replication things to know:
 
 * REPLICATION SETUP: http://plusbryan.com/mysql-replication-without-downtime
-* Trust Replication
 * Monitor Seconds_Behind_Master
 * Monitor Exec_Master_Log_Pos
 * Run SHOW PROCESSLIST;—take note of the SQL thread to see if it is processing long running queries.
@@ -358,6 +514,11 @@ PostgreSQL equivalent of MySQL's `\G'
 
     <query>\x\g\x
 
+
+
+PROGRAMMING SPECIFIC
+---
+
 PHP Find PHP CLI extension directory:
 
     php -i | grep 'extension_dir'
@@ -366,137 +527,20 @@ PHP find pecl config extension directory:
 
     pecl config-show | grep 'ext_dir'
 
-Debug bash scripts, add:
-
-    set -x
-
 Bundler show gems with path
 
     bundle list --paths
-
-Forward new port in existing SSH session:
-
-    <newline>
-    ~C
-    ssh> ?
-
-List currently established, closed, orphaned and waiting TCP sockets:
-
-    ss -s
-
-`netstat -tlnp` vs `ss -ln`
-
-    $ time netstat -tlnp
-    netstat -tlnp  0.00s user 0.02s system 97% cpu 0.016 total
-
-    $ time ss -ln
-    ss -ln  0.00s user 0.00s system 83% cpu 0.005 total
-
-Check disk I/O:
-
-    vmstat 1 10
-
-What's using disk I/O:
-
-    dstat --top-io --top-bio
-
-Show io per-device (needs sysstat package on debian):
-
-    iostat -sk 2
-
-Download missing depedencies automatically on Debian/Ubuntu:
-
-    sudo apt-get -f install
-
-Insert text at beginning of file without sed:
-
-    cat [file] | perl -pe 'BEGIN { print "[text]\n" }' > [outputfile]
-
-Insert text without abusing cat in perl (with backup file):
-
-    perl -i.bak -pe 'print "[text]\n" if $. == 1;' [file]
-
-Insert text at the end of the file with perl (with backup file):
-
-    perl -i.bak -ne 'print $_; print "[text]\n" if eof;' [file]
-
-Show compile flags for Nginx:
-
-    nginx -V 2>&1 | tr -- - '\n' | grep _module
-
-Linux print:
-
-    lp -h [cups_server]:[cups_port:-631] -d [destination_printer_name] -o [print_job_options] [filename]
-
-Check Shared Memory Segments:
-
-    ipcs -m
-
-Find process attached to shared memory segment
-
-    lsof | grep [shmid from ipcs]
-
-Stop space splitting for file in bash:
-
-```shell
-#!/usr/bin/env bash
-SAVEIFS=$IFS
-IFS=$(echo -en "\n\b")
-
-for file in $(find . -name 'file'); do
-  ...
-done
-
-IFS=$SAVEIFS
-```
-
-Allow traffic via ufw:
-
-    sudo ufw allow from [ip/any] to [host/any] port [any/port-num] proto [upd/tcp/whatevs]
-
-RCS Bulk Commit all files in directory
-
-    ci -l -t-'[file descriptor]' -m'[commit message]' *
-
-Edit last command with $EDITOR
-
-    fc
-
-Check default runlevel for system:
-
-    grep ^id /etc/inittab
-
-List services/runlevels chkconfig:
-
-    chkconfig --list
-
-Add service to startup with chkconfig:
-
-    chkconfig --level 235 [service] on
-
-Remove service from startup with chkconfig:
-
-    chkconfig --del [service]
-
-List service runlevels without chkconfig:
-
-    ls -l /etc/rc*.d
-
-Add service to startup with update-rc.d:
-
-    update-rc.d [service] defaults
-
-Remove service from startup with update-rc.d:
-
-    update-rc.d -f [service] remove
 
 NPM ingore SSL problems
 
     npm config set strict-ssl false
 
-Linux Fun Crap
 
-- Generate a list of your most used commands— 
+
+DUMB
+---
+
+- Generate a list of your most used commands—
 
     history | sed "s/^[0-9 ]*//" | sed "s/ *| */\n/g" | awk '{print $1}' | sort | uniq -c | sort -rn | head -n 100 > commands.txt
 
