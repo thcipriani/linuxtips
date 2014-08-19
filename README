@@ -534,6 +534,9 @@ NPM ingore SSL problems
 
     npm config set strict-ssl false
 
+Upgrade Node via NPM
+
+    sudo npm cache clean -f && sudo npm install -g n && sudo n stable
 
 
 DUMB
