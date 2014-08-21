@@ -35,7 +35,32 @@ alias td="tmux kill-session -t"
 # Easy Insall & Pygments: sudo apt-get install python-pip && sudo pip install Pygments
 alias c='pygmentize -O style=monokai -f console256 -g'
 
+# Best available less
+# ---
+# -F: less exits if entire file can be displayed on one screen
+# -i: ignore case for searches
+# -R: display raw control characters for ANSI escape sequences
+# -S: chop lines longer than screen
+# -X: don't clear the screen
+export LESS='-FiRSX'
 
+# ANSI escape sequences (https://github.com/robertknight/konsole/blob/master/user-doc/README.moreColors)
+# ---
+
+    ESC[ ... 38;2;<r>;<g>;<b> ... m Select RGB foreground color
+    ESC[ ... 48;2;<r>;<g>;<b> ... m Select RGB background color
+
+    ESC[ ... 38;5;<i> ... m Select indexed foreground color
+    ESC[ ... 48;5;<i> ... m Select indexed background color
+
+
+    <r>,<g> and <b> are each values in the range of 0..255 and
+    represent the brightness as usual for the respective color.
+    <i> likely is a value in 0..256, but represents an indexed
+    color assignment composed as follows:
+    0 .. 15 - System color, these are taken from the schema.
+    16 .. 231 - Forms a 6x6x6 RGB color cube.
+    232 .. 255 - A gray scale ramp without black and white.
 
 MAN PAGE INFO I NEVER REMEMBER
 ---
