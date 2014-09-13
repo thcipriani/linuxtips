@@ -44,6 +44,9 @@ alias c='pygmentize -O style=monokai -f console256 -g'
 # -X: don't clear the screen
 export LESS='-FiRSX'
 
+# Checking outbound ports
+nc -vz portquiz.net -w 1 <port>
+
 # ANSI escape sequences (https://github.com/robertknight/konsole/blob/master/user-doc/README.moreColors)
 # ---
 
@@ -193,6 +196,14 @@ IPTables Block an IPAddress [iptables(8) OPTIONS]
 IPTables Insert a rule to allow inbound tcp traffic on port 8000 (puts the rule at the top)[iptables(8) OPTIONS]
 
     iptables -I INPUT -i eth0 -p tcp --dport 8000 -j ACCEPT
+
+IPTables append a rule to allow inbound tcp traffic on port 8000 (puts the rule at the bottom)[iptables(8) OPTIONS]
+
+    iptables -I INPUT -i eth0 -p tcp --dport 8000 -j ACCEPT
+
+IPTables delete the rule to allow inbound tcp traffic on port 8000 [iptables(8) OPTIONS]
+
+    iptables -D INPUT -i eth0 -p tcp --dport 8000 -j ACCEPT
 
 Create gzipped tar from file or directory [tar(1)]
 
