@@ -401,6 +401,33 @@ Git check ignored patter matched [git-check-ignore(1) v.1.8.5+)
     git check-ignore [path]
 
 
+Mongo
+---
+
+Mongo show dbs with stats
+
+    show dbs
+
+Mongo switch dbs
+
+    use [dbname]
+
+Mongo show collections
+
+    show collections
+
+Mongo show collection stats
+
+    db.[col].stats()
+
+Mongo show collection stats in kilobytes
+
+    db.[col].stats(1024)
+
+Mongo pretty print/limit output
+
+    db.[col].find().limit(1).pretty()
+
 MySQL
 ---
 
