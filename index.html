@@ -16,6 +16,7 @@ alias ll="ls -l"
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
+alias :q=exit
 
 alias sosh=". \"${HOME}/.$(basename $SHELL)rc\""
 function digga() { dig +nocmd "$1" any +multiline +noall +answer }
