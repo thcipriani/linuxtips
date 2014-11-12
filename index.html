@@ -140,9 +140,9 @@ Shell Startup Files [bash(1)/zsh(1) INVOCATION]:
 
 Setting your hostname—Debian and Ubuntu [hostname(1)/hosts(5)]:
 
-  1. Edit `/etc/hostname` and add you FQDN, e.g., `echo "parabola.tylercipriani.com" > /etc/hostname`
+  1. Edit `/etc/hostname` and add your short hostname, e.g., `echo "parabola" > /etc/hostname`
   2. Run `hostname -F /etc/hostname` to update your hostname
-  3. Edit `/etc/hosts`:
+  3. Edit `/etc/hosts`—order matters: FQDN, HOSTNAME, localhost:
 
     127.0.1.1 parabola.tylercipriani.com parabola localhost
 
