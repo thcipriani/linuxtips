@@ -142,6 +142,19 @@ Setting your hostname—Debian and Ubuntu [hostname(1)/hosts(5)]:
 
     127.0.1.1 parabola.tylercipriani.com parabola localhost
 
+Setting Timezone—Debian and Ubuntu:
+
+    dpkg-reconfigure tzdata
+
+Setting Timezone—Arch/CentOS7/systemd:
+
+    timedatectl list-timezones
+    timedatectl set-timezone America/Mountain
+
+Setting Timezone—Old school:
+
+    ln -sf /usr/share/zoneinfo/US/Mountain /etc/localtime
+
 POSIX RegEx Patterns [grep(1)]:
 
     [:alnum:] - [a-zA-Z0-9]
