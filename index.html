@@ -365,7 +365,13 @@ Remove service from startup with update-rc.d:
 
     update-rc.d -f [service] remove
 
+OpenSSL generate 2048bit RSA (genpkey supreceeds gen[alg]) [openssl(1)/genpkey(1)]
 
+    openssl genpkey -algorithm RSA -out key.pem -pkeyopt rsa_keygen_bits:2048
+
+OpenSSL generate CSR from key, prompts for input, "Common Name" is FQDN [openssl(1)/req(1)]
+
+    openssl req -new -key privkey.pem -out cert.csr
 
 GIT
 ---
@@ -422,6 +428,9 @@ Git check ignored patter matched [git-check-ignore(1) v.1.8.5+)
 
     git check-ignore [path]
 
+Git revert merge
+
+    git revert -m 1 [sha of merge commit]
 
 Mongo
 ---
