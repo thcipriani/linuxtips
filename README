@@ -635,13 +635,39 @@ Upgrade Node via NPM
 Weechat.
 ---
 
-Add a server
+Weechat add a server
 
     /server add [SERVER_NICK_NAME] server.host.name/+6667 -autoconnect
 
-Remove a server
+Weechat remove a server
 
     /server del [SERVER_NICK_NAME]
+
+Weechat toggle nicklist
+
+    /bar toggle nicklist
+
+Weechat set nicklist postion
+
+    /set weechat.bar.nicklist.position top
+
+Weechat bind nicklist key
+
+    /key bind meta-f /bar toggle nicklist
+
+Weechat bind newline glitch key
+
+    /key bind meta-g /set weechat.look.eat_newline_glitch toggle
+
+Weechat fix formatting
+
+    /set weechat.look.prefix_align none
+    /set weechat.look.align_end_of_lines time
+
+Weechat disable fix formatting
+
+    /set weechat.look.prefix_align right
+    /set weechat.look.align_end_of_lines message
 
 DUMB
 ---
