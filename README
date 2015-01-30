@@ -223,6 +223,18 @@ IPTables delete the rule to allow inbound tcp traffic on port 8000 [iptables(8) 
 
     iptables -D INPUT -i eth0 -p tcp --dport 8000 -j ACCEPT
 
+TCPDump dump packets to/from host [tcpdump(1)]
+
+    tcpdump -n -vvv -XX host [hostname/ip]
+
+TCPDump dump packets to host on ip [tcpdump(1)]
+
+    tcpdump -n -vvv -XX dst host 192.0.2.1
+
+TCPDump dump udp packets to host and port on ip [tcpdump(1)]
+
+    tcpdump -n -vvv -XX udp dst host 192.0.2.1 and dst port 67
+
 Create gzipped tar from file or directory [tar(1)]
 
     tar -cvzf tarfile.tar.gz directory file otherfile
