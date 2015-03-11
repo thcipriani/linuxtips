@@ -231,10 +231,6 @@ TCPDump dump packets to host on ip [tcpdump(1)]
 
     tcpdump -n -vvv -XX dst host 192.0.2.1
 
-TCPDump dump udp packets to host and port on ip [tcpdump(1)]
-
-    tcpdump -n -vvv -XX udp dst host 192.0.2.1 and dst port 67
-
 Create gzipped tar from file or directory [tar(1)]
 
     tar -cvzf tarfile.tar.gz directory file otherfile
@@ -264,6 +260,22 @@ Forward new port in existing SSH session:
     <newline>
     ~C
     ssh> ?
+
+SSH Generate a public key given a private key [ssh-keygen(1)]
+
+    ssh-keygen -y -f [private key]
+
+SSH Get fingerprint from public key [ssh-keygen(1)]
+
+    ssh-keygen -l -f [public key]
+
+SSH List key fingerprints in ssh-agent [ssh-add(1)]:
+
+    ssh-add -l
+
+SSH Skip known host file checking:
+
+    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no [server]
 
 List currently established, closed, orphaned and waiting TCP sockets:
 
@@ -680,6 +692,20 @@ Weechat disable fix formatting
 
     /set weechat.look.prefix_align right
     /set weechat.look.align_end_of_lines message
+
+Weechat split window horizontally
+
+    /window splith [percentage]
+
+Weechat close split window
+
+    /window merge
+
+Weechat jump around splits use F7/F8
+
+Weechat add more nickname colors
+
+    /set weechat.color.chat_nick_colors red,green,brown,blue,magenta,cyan,white,lightred,lightgreen,yellow,lightblue,lightmagenta,lightcyan
 
 DUMB
 ---
