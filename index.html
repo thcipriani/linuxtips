@@ -398,6 +398,16 @@ OpenSSL generate CSR from key, prompts for input, "Common Name" is FQDN [openssl
 
     openssl req -new -key privkey.pem -out cert.csr
 
+Umask defaults set in /etc/login.defs [pam_mask(8)]
+
+    Debian 022
+      files: 0666 & ~022 = 0644 -rw-r--r--
+      directorys: 0777 & ~022 = 0755 -rwxr-xr-x
+
+    CentOS/RHEL 002
+      files: 0666 & ~002 = 0644 -rw-rw-r--
+      directorys: 0777 & ~002 = 0755 -rwxrwxr-x
+
 GIT
 ---
 
