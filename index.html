@@ -457,6 +457,24 @@ Git revert merge
 
     git revert -m 1 [sha of merge commit]
 
+Git diff your branch with upstream:
+
+    git log HEAD..@{u}
+
+Git check status on a directory you're not in
+
+    GIT_REPO="$HOME/hi"
+    git --work-tree="$GIT_REPO" --git-dir="$GIT_REPO/.git" status
+
+Git list remotes:
+
+    git remote -v
+
+Git change remote:
+
+    git remote set-url [remote-name] [new-url]
+    git remote set-url origin https://something
+
 Mongo
 ---
 
