@@ -44,6 +44,9 @@ export LESS='-FiRSX'
 # Checking outbound ports
 nc -vz portquiz.net -w 1 <port>
 
+# Watch a command with a log
+watch -n1 'uptime | tee uptime.log'
+
 # ANSI escape sequences (https://github.com/robertknight/konsole/blob/master/user-doc/README.moreColors)
 # ---
 
