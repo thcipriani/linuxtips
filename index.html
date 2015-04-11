@@ -318,6 +318,10 @@ Show io per-device (needs sysstat package on debian):
 
     iostat -sk 2
 
+Show top users of io:
+
+    iotop -botqqq --iter=20 | tee -a /var/log/iotop
+
 Download missing depedencies automatically on Debian/Ubuntu [apt-get(8)]:
 
     sudo apt-get --fix-broken install
