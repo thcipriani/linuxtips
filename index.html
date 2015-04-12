@@ -310,17 +310,23 @@ Check disk I/O:
 
     vmstat 1 10
 
-What's using disk I/O:
+What's using disk I/O [dstat(1)]:
 
     dstat --top-io --top-bio
 
-Show io per-device (needs sysstat package on debian):
+Show io per-device (needs sysstat package on debian) [iostat(1)]:
 
-    iostat -sk 2
+    iostat -k 2
 
-Show top users of io:
+Show top users of io [iotop(8)]
+: -b     = non interactive, easier to log
+: -o     = only show proc doing IO, not all process
+: -t     = add timestamp
+: -qqq   = don't show Total DISK READ/Actual DISKREAD after every iteration
+: -n 20  = quit after 20 seconds (default never quits)
+: tee -a = append to log file as well as show on stdout
 
-    iotop -botqqq --iter=20 | tee -a /var/log/iotop
+    iotop -botqqq -n 20 | tee -a /var/log/iotop
 
 Download missing depedencies automatically on Debian/Ubuntu [apt-get(8)]:
 
