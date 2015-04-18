@@ -301,6 +301,10 @@ List currently established, closed, orphaned and waiting TCP sockets:
     $ time ss -ln
     ss -ln  0.00s user 0.00s system 83% cpu 0.005 total
 
+Unmount FUSE filesystems [fusermount(1)]:
+
+    sudo fusermount -u /path/to/fs
+
 Check disk I/O:
 
     vmstat 1 10
