@@ -231,6 +231,17 @@ IPTables delete the rule to allow inbound tcp traffic on port 8000 [iptables(8) 
 
     iptables -D INPUT -i eth0 -p tcp --dport 8000 -j ACCEPT
 
+IPTables save to file [iptables-save(8)]
+
+    iptables-save > /etc/iptables.up.rules
+
+IPTabels survive reboot [https://www.debian-administration.org/article/445/Getting_IPTables_to_survive_a_reboot]:
+
+    iptables-save > /etc/iptables.up.rules
+    printf "#!/usr/bin/env bash\niptables-restore < /etc/iptables.up.rules\n" \
+        > /etc/network/ifup.d/iptables
+    chmod +x /etc/network/ifup.d/iptables
+
 TCPDump dump packets to/from host [tcpdump(1)]
 
     tcpdump -n -vvv -XX host [hostname/ip]
