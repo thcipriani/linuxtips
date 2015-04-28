@@ -73,6 +73,9 @@ watch -n1 'uptime | tee uptime.log'
     16 .. 231 - Forms a 6x6x6 RGB color cube.
     232 .. 255 - A gray scale ramp without black and white.
 
+# Create a crypt encrypted password for /etc/passwd
+python -c 'import crypt; print crypt.crypt("password", "$6$salt$")'
+
 MAN PAGE INFO I NEVER REMEMBER
 ---
 History Append history lines entered since the beginning of the current Bash session to the history file:
@@ -112,6 +115,10 @@ Bash Special Variables [bash(1) PARAMETERS, Special Parameters]:
 Bash test a socket exists [bash(1) CONDITIONAL EXPRESSIONS]
 
   test -S [socketname] && echo 'true'
+
+Remove user from /etc/passwd manually without userdel [vipw(8)]:
+
+    EDITOR=vim vipw
 
 Shell Startup Files [bash(1)/zsh(1) INVOCATION]:
 
