@@ -306,9 +306,17 @@ SSH List key fingerprints in ssh-agent [ssh-add(1)]:
 
     ssh-add -l
 
-SSH Skip known host file checking:
+SSH Skip known host file checking [ssh_config(5)]:
 
     ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no [server]
+
+SSH Remove hostname from known_hosts file [ssh-keygen(1)]:
+
+    ssh-keygen -R [hostname] >> ~/.ssh/known_hosts
+
+SSH automatically add server key to known_hosts file [ssh-keyscan(1)]:
+
+    ssh-keyscan -H [hostname] >> ~/.ssh/known_hosts
 
 List currently established, closed, orphaned and waiting TCP sockets:
 
