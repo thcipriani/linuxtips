@@ -191,6 +191,14 @@ Show linked library dependencies of a binary [ldd(1)]
 
     ldd $(command -v <binary>)
 
+Dump files in octal [od(1)]
+
+    od -c [file]
+
+Find files in directory with no newline at eof [pcregrep(1)]:
+
+    pcregrep -LMr '\n$' .
+
 Cronjob Time Syntax [crontab(5)]:
 
 - m h dom m dow <what_to_do>
