@@ -314,6 +314,11 @@ SSH List key fingerprints in ssh-agent [ssh-add(1)]:
 
     ssh-add -l
 
+SSH update private keys in new format rather than PEM (use 64 rounds—2 seconds)
+also add or change passphrase (`-p`)[ssh-keygen(1)]
+
+    ssh-keygen -o -a 64 -p -f [id_rsa]
+
 SSH Skip known host file checking [ssh_config(5)]:
 
     ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no [server]
@@ -455,6 +460,10 @@ OpenSSL generate 2048bit RSA (genpkey supreceeds gen[alg]) [openssl(1)/genpkey(1
 OpenSSL generate CSR from key, prompts for input, "Common Name" is FQDN [openssl(1)/req(1)]
 
     openssl req -new -key privkey.pem -out cert.csr
+
+OpenSSL find key length from an rsa private key [openssl(1)/rsa(1)]
+
+    openssl rsa -in [private_key] -text -noout
 
 Umask defaults set in /etc/login.defs [pam_mask(8)]
 
