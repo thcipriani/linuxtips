@@ -123,6 +123,14 @@ Remove user from /etc/passwd manually without userdel [vipw(8)]:
 
     EDITOR=vim vipw
 
+Remove user from `/etc/shadow` manually without userdel [vipw(8)]:
+
+    EDITOR=vim vipw -s
+
+Remove group from /etc/group manually without groupdel [vigr(8)]:
+
+    EDITOR=vim vigr
+
 Shell Startup Files [bash(1)/zsh(1) INVOCATION]:
 
 - Linux/Bash/TTY:
@@ -197,6 +205,14 @@ Show linked library dependencies of a binary [ldd(1)]
 Dump files in octal [od(1)]
 
     od -c [file]
+
+Dump file as plain hex [xxd(1)]
+
+    xxd -p
+
+Reassemble plain hexdump [xxd(1)]
+
+    xxd -p -r
 
 Find files in directory with no newline at eof [pcregrep(1)]:
 
@@ -485,6 +501,10 @@ Umask defaults set in /etc/login.defs [pam_mask(8)]
 
 GIT
 ---
+
+Git checkout last checked out branch:
+
+    git checkout -
 
 Git stash unstaged commits [git-stash(1)]
 
